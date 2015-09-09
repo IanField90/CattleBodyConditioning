@@ -1,27 +1,34 @@
 package com.ianfield.bodyscoring;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ViewById;
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-@EActivity(R.layout.activity_create_record)
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class CreateRecordActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    @ViewById(R.id.txtDate)
+    @Bind(R.id.txtDate)
     TextView mDateText;
 
-    @ViewById(R.id.txtExpectedDate)
+    @Bind(R.id.txtExpectedDate)
     TextView mExpectedDate;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_record);
+        ButterKnife.bind(this);
+    }
 
     Calendar todaysDatePickerCaldendar = Calendar.getInstance();
     DatePickerDialog todaysDatePickerDialog = DatePickerDialog.newInstance(
@@ -39,20 +46,20 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
             expectedDatePickerCaldendar.get(Calendar.DAY_OF_MONTH)
     );
 
-    @Click(R.id.btnSetDate)
-    void clickSetDate() {
+    @OnClick(R.id.btnSetDate)
+    public void clickSetDate() {
         todaysDatePickerDialog.show(getFragmentManager(), "todaysDatePickerDialog");
     }
 
-    @Click(R.id.btnSetExpectedDate)
-    void clickSetExpectedDate() {
+    @OnClick(R.id.btnSetExpectedDate)
+    public void clickSetExpectedDate() {
         expectedDatePickerDialog.show(getFragmentManager(), "expectedDatePickerDialog");
     }
 
-    @Click(R.id.btnNext)
-    void clickNext() {
+    @OnClick(R.id.btnNext)
+    public void clickNext() {
         // TODO validation
-        ScoringActivity_.intent(this).start();
+        startActivity(new Intent(this, ScoringActivity.class));
         finish();
     }
 
