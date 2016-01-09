@@ -15,7 +15,6 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        useJack true
     }
     buildTypes {
         release {
@@ -26,10 +25,6 @@ android {
 
     lintOptions {
         disable 'InvalidPackage', 'PrivateResource', 'UnusedResources', 'butterknife.OnClick'
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
     }
 }
 

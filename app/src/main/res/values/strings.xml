@@ -6,11 +6,14 @@
     <string name="farm_name">Farm name</string>
     <string name="date">Date</string>
     <string name="set_date">Set date</string>
-    <string name="expected_date">Expected date</string>
+    <string name="expected_date">Planned calving date</string>
     <string name="set_expected_date">Set expected date</string>
     <string name="next">Next</string>
     <string name="title_activity_scoring">Score</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="done">Done</string>
+    <string name="snack_missing_setting">Please make sure to enter all values.</string>
+    <string name="snackbar_missing_name">Please enter a name</string>
+    <string name="snackbar_dismiss">Dismiss</string>
 </resources>
