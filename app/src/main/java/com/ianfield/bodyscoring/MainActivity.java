@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity
 
     public void actionSettingsClicked() {
         // Open settings screen to toggle mode (scoring resolution/values)
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 
     @Override

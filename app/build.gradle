@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 repositories {
     mavenCentral()
     mavenLocal()
+    maven { url "https://jitpack.io" }
 }
 
 android {
@@ -38,4 +39,11 @@ dependencies {
 
     compile 'com.google.android.gms:play-services-base:8.4.0'
     compile 'com.google.android.gms:play-services-drive:8.4.0'
+
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
+
+    compile 'com.j256.ormlite:ormlite-android:4.48'
+
+    compile 'com.facebook.stetho:stetho:1.2.0'
+
 }
