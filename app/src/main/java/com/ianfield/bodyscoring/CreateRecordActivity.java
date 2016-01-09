@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,11 +16,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CreateRecordActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+    public static final String EXPECTED_DATE_PICKER_DIALOG = "expectedDatePickerDialog";
+    public static final String TODAYS_DATE_PICKER_DIALOG = "todaysDatePickerDialog";
+
     @Bind(R.id.txtDate)
     TextView mDateText;
 
     @Bind(R.id.txtExpectedDate)
     TextView mExpectedDate;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +52,12 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
 
     @OnClick(R.id.btnSetDate)
     public void clickSetDate() {
-        todaysDatePickerDialog.show(getFragmentManager(), "todaysDatePickerDialog");
+        todaysDatePickerDialog.show(getFragmentManager(), TODAYS_DATE_PICKER_DIALOG);
     }
 
     @OnClick(R.id.btnSetExpectedDate)
     public void clickSetExpectedDate() {
-        expectedDatePickerDialog.show(getFragmentManager(), "expectedDatePickerDialog");
+        expectedDatePickerDialog.show(getFragmentManager(), EXPECTED_DATE_PICKER_DIALOG);
     }
 
     @OnClick(R.id.btnNext)
