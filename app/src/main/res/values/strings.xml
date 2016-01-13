@@ -20,4 +20,7 @@
     <string name="pref_Locality">Locality</string>
     <string name="pref_localities_default">0</string>
     <string name="settings">Settings</string>
+    <string name="add">+</string>
+    <string name="subtract">-</string>
+    <string name="zero">0</string>
 </resources>
