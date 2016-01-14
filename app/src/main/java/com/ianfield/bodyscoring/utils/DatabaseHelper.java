@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.ianfield.bodyscoring.models.Record;
+import com.ianfield.bodyscoring.models.Score;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -23,7 +24,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String DATABASE_NAME = "bodyconditioning.db";
     private static final int DATABASE_VERSION = 1;
 
-    private Dao<Record, Integer> recordDao = null;
+    private Dao<Record, Integer> mRecordDao = null;
+    private Dao<Score, Integer> mScoreDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,6 +36,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(TAG, "onCreate");
             TableUtils.createTable(connectionSource, Record.class);
+            TableUtils.createTable(connectionSource, Score.class);
         } catch (SQLException e) {
             Log.e(TAG, "Can't create database", e);
             throw new RuntimeException(e);
@@ -56,10 +59,17 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * @return The Database Access Object (DAO) for our {@link Record} class.
      */
     public Dao<Record, Integer> getRecordDao() throws SQLException {
-        if (recordDao == null) {
-            recordDao = getDao(Record.class);
+        if (mRecordDao == null) {
+            mRecordDao = getDao(Record.class);
         }
-        return recordDao;
+        return mRecordDao;
+    }
+
+    public Dao<Score, Integer> getScoreDao() throws SQLException {
+        if (mScoreDao == null) {
+            mScoreDao = getDao(Score.class);
+        }
+        return mScoreDao;
     }
 
     /**
@@ -68,6 +78,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void close() {
         super.close();
-        recordDao = null;
+        mRecordDao = null;
+        mScoreDao = null;
     }
 }

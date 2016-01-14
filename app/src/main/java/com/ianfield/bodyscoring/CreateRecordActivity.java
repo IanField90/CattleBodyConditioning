@@ -29,8 +29,8 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     @Bind(R.id.txtExpectedCalvingDate)
     TextView mExpectedCalvingDate;
 
-    @Bind(R.id.etFarmName)
-    EditText mFarmName;
+    @Bind(R.id.nameEditText)
+    EditText mName;
 
     Record mRecord = new Record();
 
@@ -74,7 +74,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
 
     @OnClick(R.id.btnNext)
     public void clickNext() {
-        mRecord.setName(mFarmName.getText().toString());
+        mRecord.setName(mName.getText().toString());
         if (mRecord.isValid()) {
             startActivity(new Intent(this, ScoringActivity.class));
             finish();

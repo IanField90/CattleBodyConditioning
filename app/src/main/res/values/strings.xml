@@ -3,7 +3,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_create_record">New</string>
-    <string name="farm_name">Farm name</string>
+    <string name="name">Name</string>
     <string name="date">Date</string>
     <string name="set_date">Set date</string>
     <string name="expected_date">Planned calving date</string>

@@ -22,8 +22,8 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/farm_name"
-                android:id="@+id/etFarmName"
+                android:hint="@string/name"
+                android:id="@+id/nameEditText"
                 android:imeOptions="actionDone"
                 android:maxLines="1"
                 android:inputType="textCapWords" />
