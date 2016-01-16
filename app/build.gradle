@@ -4,6 +4,7 @@ repositories {
     mavenCentral()
     mavenLocal()
     maven { url "https://jitpack.io" }
+    maven { url "https://clojars.org/repo/" }
 }
 
 android {
@@ -63,5 +64,8 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-android:4.48'
 
     compile 'com.facebook.stetho:stetho:1.2.0'
+
+    compile 'frankiesardo:icepick:3.1.0'
+    provided 'frankiesardo:icepick-processor:3.1.0'
 
 }
