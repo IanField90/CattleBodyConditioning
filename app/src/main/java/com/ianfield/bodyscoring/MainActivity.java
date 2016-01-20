@@ -16,6 +16,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.drive.Drive;
+import com.ianfield.bodyscoring.managers.RecordManager;
 import com.ianfield.bodyscoring.widgets.RecordAdapter;
 
 import butterknife.Bind;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity
     @Bind(R.id.savedList)
     RecyclerView mRecyclerView;
 
+    private RecordAdapter mRecordAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +46,13 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-        RecordAdapter adapter = new RecordAdapter();
-        mRecyclerView.setAdapter(adapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        mRecordAdapter = new RecordAdapter(RecordManager.getAllRecords(this));
+        mRecyclerView.setAdapter(mRecordAdapter);
         if (mGoogleApiClient == null) {
             // Create the API client and bind it to an instance variable.
             // We use this instance as the callback for connection and connection

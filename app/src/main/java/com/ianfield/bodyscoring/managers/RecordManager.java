@@ -8,6 +8,7 @@ import com.ianfield.bodyscoring.utils.ScoreScale;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by Ian on 14/01/2016.
@@ -47,6 +48,14 @@ public class RecordManager {
         DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
         try {
             return helper.getRecordDao().queryForId(id);
+        } catch (SQLException ignore) { }
+        return null;
+    }
+
+    public static ArrayList<Record> getAllRecords(Context context) {
+        DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
+        try {
+            return new ArrayList<>(helper.getRecordDao().queryForAll());
         } catch (SQLException ignore) { }
         return null;
     }
