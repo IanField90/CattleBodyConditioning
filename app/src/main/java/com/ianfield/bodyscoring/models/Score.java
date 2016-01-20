@@ -10,7 +10,7 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Score {
     @DatabaseField(foreign = true, columnName = "record_id") Record record;
 
-    @DatabaseField float score;
+    @DatabaseField double score;
 
     @DatabaseField(defaultValue = "0") int count = 0;
 
@@ -22,11 +22,11 @@ public class Score {
         this.record = record;
     }
 
-    public float getScore() {
+    public double getScore() {
         return score;
     }
 
-    public void setScore(float score) {
+    public void setScore(double score) {
         this.score = score;
     }
 

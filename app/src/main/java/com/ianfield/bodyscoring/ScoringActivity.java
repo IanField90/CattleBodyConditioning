@@ -1,20 +1,53 @@
 package com.ianfield.bodyscoring;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.ianfield.bodyscoring.managers.RecordManager;
+import com.ianfield.bodyscoring.models.Record;
+import com.ianfield.bodyscoring.widgets.ScoreAdapter;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class ScoringActivity extends AppCompatActivity {
+    private static final String TAG = "ScoringActivity";
+
+    @Bind(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+
+    Record mRecord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoring);
         ButterKnife.bind(this);
+
+        retrieveRecord();
+
+        mRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(layoutManager);
+        ScoreAdapter adapter = new ScoreAdapter(mRecord.getScores());
+        mRecyclerView.setAdapter(adapter);
+
+        Log.d(TAG, "onCreate: " + adapter.getItemCount());
+        adapter.getItemCount();
+    }
+
+    private void retrieveRecord() {
+        mRecord = RecordManager.getRecordById(this,
+                getIntent().getExtras().getInt(
+                    getString(R.string.extra_record_id)
+                )
+        );
     }
 
     @Override

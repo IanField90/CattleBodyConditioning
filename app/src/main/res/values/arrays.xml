@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="pref_localities_entries">
-        <item>UK</item>
         <item>NZ</item>
+        <item>UK</item>
     </string-array>
     <string-array name="pref_localities_values">
-        <item>0</item>
-        <item>1</item>
+        <item>NZ</item>
+        <item>UK</item>
     </string-array>
 </resources>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.ianfield.bodyscoring.managers.RecordManager;
 import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.utils.DateUtils;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -76,8 +77,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     public void clickNext() {
         mRecord.setName(mName.getText().toString());
         if (mRecord.isValid()) {
-            startActivity(new Intent(this, ScoringActivity.class));
-            finish();
+            saveRecordAndLaunchScoring();
         } else {
             final Snackbar snackBar = Snackbar.make(findViewById(android.R.id.content), R.string.snackbar_missing_name, Snackbar.LENGTH_LONG);
 
@@ -89,6 +89,14 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
             });
             snackBar.show();
         }
+    }
+
+    private void saveRecordAndLaunchScoring() {
+        mRecord = RecordManager.createRecord(this, mRecord);
+        Intent intent = new Intent(this, ScoringActivity.class);
+        intent.putExtra(getString(R.string.extra_record_id), mRecord.getId());
+        startActivity(intent);
+        finish();
     }
 
     @Override

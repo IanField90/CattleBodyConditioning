@@ -4,6 +4,6 @@
     tools:context="com.ianfield.bodyscoring.ScoringActivity">
 
     <item android:id="@+id/action_done"
-        android:title="@string/done"
+        android:title="@string/save"
         app:showAsAction="always" />
 </menu>

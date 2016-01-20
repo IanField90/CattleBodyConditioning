@@ -18,9 +18,13 @@
     <string name="snackbar_dismiss">Dismiss</string>
     <string name="title_activity_maps">Map</string>
     <string name="pref_Locality">Locality</string>
-    <string name="pref_localities_default">0</string>
+    <string name="pref_localities_default">NZ</string>
     <string name="settings">Settings</string>
     <string name="add">+</string>
     <string name="subtract">-</string>
     <string name="zero">0</string>
+
+
+    <string name="extra_record_id">record_id</string>
+    <string name="save">Save</string>
 </resources>

@@ -7,6 +7,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -19,7 +20,10 @@ import java.util.Date;
  */
 @DatabaseTable(tableName = "records")
 public class Record {
-    private enum Setting { UK, NZ }
+    public enum Setting { UK, NZ }
+
+    @DatabaseField(generatedId = true)
+    int id;
 
     @DatabaseField String name;
     @DatabaseField Date plannedCalvingDate;
@@ -27,6 +31,10 @@ public class Record {
     @DatabaseField Setting setting = Setting.UK;
 
     @ForeignCollectionField(eager = true) private ForeignCollection<Score> scores;
+
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -63,6 +71,10 @@ public class Record {
 
     public boolean isValid() {
         return (plannedCalvingDate != null && scoringDate != null && !TextUtils.isEmpty(name));
+    }
+
+    public ArrayList<Score> getScores() {
+        return new ArrayList<>(this.scores);
     }
 
 //    public String toSummary() {
