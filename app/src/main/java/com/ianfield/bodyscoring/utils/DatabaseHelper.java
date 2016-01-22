@@ -24,8 +24,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String DATABASE_NAME = "bodyconditioning.db";
     private static final int DATABASE_VERSION = 1;
 
-    private Dao<Record, Integer> mRecordDao = null;
-    private Dao<Score, Integer> mScoreDao = null;
+    private Dao<Record, Integer> recordDao = null;
+    private Dao<Score, Integer> scoreDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -59,17 +59,17 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * @return The Database Access Object (DAO) for our {@link Record} class.
      */
     public Dao<Record, Integer> getRecordDao() throws SQLException {
-        if (mRecordDao == null) {
-            mRecordDao = getDao(Record.class);
+        if (recordDao == null) {
+            recordDao = getDao(Record.class);
         }
-        return mRecordDao;
+        return recordDao;
     }
 
     public Dao<Score, Integer> getScoreDao() throws SQLException {
-        if (mScoreDao == null) {
-            mScoreDao = getDao(Score.class);
+        if (scoreDao == null) {
+            scoreDao = getDao(Score.class);
         }
-        return mScoreDao;
+        return scoreDao;
     }
 
     /**
@@ -78,7 +78,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void close() {
         super.close();
-        mRecordDao = null;
-        mScoreDao = null;
+        recordDao = null;
+        scoreDao = null;
     }
 }

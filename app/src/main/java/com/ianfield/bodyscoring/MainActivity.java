@@ -27,15 +27,15 @@ public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "MainActivity";
-    GoogleApiClient mGoogleApiClient;
+    GoogleApiClient googleApiClient;
     public static final int RESOLVE_CONNECTION_REQUEST_CODE = 1;
     private static final int REQUEST_CODE_CREATOR = 2;
     private static final int REQUEST_CODE_RESOLUTION = 3;
 
     @Bind(R.id.savedList)
-    RecyclerView mRecyclerView;
+    RecyclerView recyclerView;
 
-    private RecordAdapter mRecordAdapter;
+    private RecordAdapter recordAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,35 +43,35 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mRecyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mRecordAdapter = new RecordAdapter(RecordManager.getAllRecords(this));
-        mRecyclerView.setAdapter(mRecordAdapter);
-        if (mGoogleApiClient == null) {
+        recordAdapter = new RecordAdapter(RecordManager.getAllRecords(this));
+        recyclerView.setAdapter(recordAdapter);
+        if (googleApiClient == null) {
             // Create the API client and bind it to an instance variable.
             // We use this instance as the callback for connection and connection
             // failures.
             // Since no account name is passed, the user is prompted to choose.
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
+            googleApiClient = new GoogleApiClient.Builder(this)
                     .addApi(Drive.API)
                     .addScope(Drive.SCOPE_FILE)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .build();
         }
-//        mGoogleApiClient.connect();
+//        googleApiClient.connect();
     }
 
     @Override
     protected void onPause() {
-        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
+        if (googleApiClient != null && googleApiClient.isConnected()) {
+            googleApiClient.disconnect();
         }
         super.onPause();
     }
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity
 //        switch (requestCode) {
 //            case RESOLVE_CONNECTION_REQUEST_CODE:
 //                if (resultCode == RESULT_OK) {
-//                    mGoogleApiClient.connect();
+//                    googleApiClient.connect();
 //                }
 //                break;
 //        }

@@ -16,10 +16,10 @@ import java.util.ArrayList;
  * Created by Ian Field on 1/20/16.
  */
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
-    ArrayList<Record> mRecords;
+    ArrayList<Record> records;
 
     public RecordAdapter(ArrayList<Record> dataSet) {
-        this.mRecords = dataSet;
+        this.records = dataSet;
     }
 
     @Override
@@ -30,22 +30,22 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Record record = mRecords.get(position);
-        holder.mName.setText(record.getName());
+        Record record = records.get(position);
+        holder.name.setText(record.getName());
     }
 
     @Override
     public int getItemCount() {
-        return mRecords.size();
+        return records.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView mCardView;
-        public TextView mName;
+        public CardView cardView;
+        public TextView name;
         public ViewHolder(View container) {
             super(container);
-            mCardView = (CardView) container;
-            mName = (TextView) mCardView.findViewById(R.id.name);
+            cardView = (CardView) container;
+            name = (TextView) cardView.findViewById(R.id.name);
         }
     }
 }

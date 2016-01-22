@@ -20,9 +20,9 @@ public class ScoringActivity extends AppCompatActivity {
     private static final String TAG = "ScoringActivity";
 
     @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+    RecyclerView recyclerView;
 
-    Record mRecord;
+    Record record;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +32,18 @@ public class ScoringActivity extends AppCompatActivity {
 
         retrieveRecord();
 
-        mRecyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
-        ScoreAdapter adapter = new ScoreAdapter(mRecord.getScores());
-        mRecyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+        ScoreAdapter adapter = new ScoreAdapter(record.getScores());
+        recyclerView.setAdapter(adapter);
 
         Log.d(TAG, "onCreate: " + adapter.getItemCount());
         adapter.getItemCount();
     }
 
     private void retrieveRecord() {
-        mRecord = RecordManager.getRecordById(this,
+        record = RecordManager.getRecordById(this,
                 getIntent().getExtras().getInt(
                     getString(R.string.extra_record_id)
                 )

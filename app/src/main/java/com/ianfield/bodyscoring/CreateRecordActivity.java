@@ -25,15 +25,15 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     public static final String SCORING_DATE_PICKER = "scoring_date_picker";
 
     @Bind(R.id.txtScoringDate)
-    TextView mDateText;
+    TextView dateText;
 
     @Bind(R.id.txtExpectedCalvingDate)
-    TextView mExpectedCalvingDate;
+    TextView expectedCalvingDateText;
 
     @Bind(R.id.nameEditText)
-    EditText mName;
+    EditText nameEdit;
 
-    Record mRecord = new Record();
+    Record record = new Record();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +41,10 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         setContentView(R.layout.activity_create_record);
         ButterKnife.bind(this);
         Date today = new Date();
-        mRecord.setPlannedCalvingDate(today);
-        mRecord.setScoringDate(today);
-        mDateText.setText(DateUtils.dateToString(new Date()));
-        mExpectedCalvingDate.setText(DateUtils.dateToString(new Date()));
+        record.setPlannedCalvingDate(today);
+        record.setScoringDate(today);
+        dateText.setText(DateUtils.dateToString(new Date()));
+        expectedCalvingDateText.setText(DateUtils.dateToString(new Date()));
     }
 
     Calendar todaysDatePickerCaldendar = Calendar.getInstance();
@@ -75,8 +75,8 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
 
     @OnClick(R.id.btnNext)
     public void clickNext() {
-        mRecord.setName(mName.getText().toString());
-        if (mRecord.isValid()) {
+        record.setName(nameEdit.getText().toString());
+        if (record.isValid()) {
             saveRecordAndLaunchScoring();
         } else {
             final Snackbar snackBar = Snackbar.make(findViewById(android.R.id.content), R.string.snackbar_missing_name, Snackbar.LENGTH_LONG);
@@ -92,9 +92,9 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     }
 
     private void saveRecordAndLaunchScoring() {
-        mRecord = RecordManager.createRecord(this, mRecord);
+        record = RecordManager.createRecord(this, record);
         Intent intent = new Intent(this, ScoringActivity.class);
-        intent.putExtra(getString(R.string.extra_record_id), mRecord.getId());
+        intent.putExtra(getString(R.string.extra_record_id), record.getId());
         startActivity(intent);
         finish();
     }
@@ -107,11 +107,11 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         if (view == todaysDatePickerDialog) {
-            mRecord.setScoringDate(date.getTime());
-            mDateText.setText(DateUtils.dateToString(date.getTime()));
+            record.setScoringDate(date.getTime());
+            dateText.setText(DateUtils.dateToString(date.getTime()));
         } else {
-            mRecord.setPlannedCalvingDate(date.getTime());
-            mExpectedCalvingDate.setText(DateUtils.dateToString(date.getTime()));
+            record.setPlannedCalvingDate(date.getTime());
+            expectedCalvingDateText.setText(DateUtils.dateToString(date.getTime()));
         }
     }
 }

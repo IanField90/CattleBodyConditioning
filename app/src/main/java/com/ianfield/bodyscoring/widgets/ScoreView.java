@@ -15,12 +15,12 @@ import com.ianfield.bodyscoring.R;
  */
 public class ScoreView extends LinearLayout {
 
-    private Button mSubtractButton;
-    private Button mAddButton;
-    private TextView mCountTextView;
-    private TextView mScoreTextView;
-    private double mScore = 0;
-    private int mCount = 0;
+    private Button subtractButton;
+    private Button addButton;
+    private TextView countText;
+    private TextView scoreText;
+    private double score = 0;
+    private int count = 0;
 
     public ScoreView(Context context) {
         super(context);
@@ -50,48 +50,48 @@ public class ScoreView extends LinearLayout {
     }
 
     public void setCount(int count) {
-        mCount = count;
-        mCountTextView.setText(String.valueOf(mCount));
+        this.count = count;
+        countText.setText(String.valueOf(this.count));
     }
 
     public void setScore(double score) {
-        mScore = score;
-        mScoreTextView.setText(String.valueOf(mScore));
+        this.score = score;
+        scoreText.setText(String.valueOf(this.score));
     }
 
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        mSubtractButton = (Button) this.findViewById(R.id.subtract_button);
-        mAddButton = (Button) this.findViewById(R.id.add_button);
-        mCountTextView = (TextView) this.findViewById(R.id.count_text);
-        mScoreTextView = (TextView) this.findViewById(R.id.score);
-        mScoreTextView.setText(String.valueOf(mScore));
+        subtractButton = (Button) this.findViewById(R.id.subtract_button);
+        addButton = (Button) this.findViewById(R.id.add_button);
+        countText = (TextView) this.findViewById(R.id.count_text);
+        scoreText = (TextView) this.findViewById(R.id.score);
+        scoreText.setText(String.valueOf(score));
 
-        if (mCount == 0) {
-            mSubtractButton.setEnabled(false);
+        if (count == 0) {
+            subtractButton.setEnabled(false);
         }
-        mAddButton.setOnClickListener(new OnClickListener() {
+        addButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCount++;
-                mCountTextView.setText(String.valueOf(mCount));
+                count++;
+                countText.setText(String.valueOf(count));
 
-                if (mCount > 0) {
-                    mSubtractButton.setEnabled(true);
+                if (count > 0) {
+                    subtractButton.setEnabled(true);
                 }
             }
         });
 
-        mSubtractButton.setOnClickListener(new OnClickListener() {
+        subtractButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mCount > 0) {
-                    mCount--;
-                    mCountTextView.setText(String.valueOf(mCount));
+                if (count > 0) {
+                    count--;
+                    countText.setText(String.valueOf(count));
 
-                    if (mCount == 0) {
-                        mSubtractButton.setEnabled(false);
+                    if (count == 0) {
+                        subtractButton.setEnabled(false);
                     }
                 }
             }

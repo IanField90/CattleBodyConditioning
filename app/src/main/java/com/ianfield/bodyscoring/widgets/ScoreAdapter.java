@@ -16,10 +16,10 @@ import java.util.ArrayList;
  * TODO score change callback to update DB
  */
 public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> {
-    private ArrayList<Score> mDataset;
+    private ArrayList<Score> dataset;
 
     public ScoreAdapter(ArrayList<Score> dataset) {
-        this.mDataset = dataset;
+        this.dataset = dataset;
     }
 
     @Override
@@ -30,23 +30,23 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Score dataItem = mDataset.get(position);
-        holder.mScoreView.setCount(dataItem.getCount());
-        holder.mScoreView.setScore(dataItem.getScore());
+        Score dataItem = dataset.get(position);
+        holder.scoreView.setCount(dataItem.getCount());
+        holder.scoreView.setScore(dataItem.getScore());
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        return dataset.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView mCardView;
-        public ScoreView mScoreView;
+        public CardView cardView;
+        public ScoreView scoreView;
         public ViewHolder(View container) {
             super(container);
-            mCardView = (CardView) container.findViewById(R.id.cardView);
-            mScoreView = (ScoreView) mCardView.findViewById(R.id.scoreView);
+            cardView = (CardView) container.findViewById(R.id.cardView);
+            scoreView = (ScoreView) cardView.findViewById(R.id.scoreView);
         }
     }
 
