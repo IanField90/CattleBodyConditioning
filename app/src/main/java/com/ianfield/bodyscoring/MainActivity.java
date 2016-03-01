@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -51,7 +53,26 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        recordAdapter = new RecordAdapter(RecordManager.getAllRecords(this));
+        recordAdapter = new RecordAdapter(RecordManager.getAllRecords(this), new RecordAdapter.OnRecordActionListener() {
+            @Override
+            public void onView(int position, TextView name) {
+                Intent intent = new Intent(MainActivity.this, ViewRecordActivity.class);
+                intent.putExtra("name", name.getText().toString());
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(MainActivity.this, name, "name");
+                startActivity(intent, options.toBundle());
+            }
+
+            @Override
+            public void onEdit(int position) {
+
+            }
+
+            @Override
+            public void onDelete(int position) {
+
+            }
+        });
         recyclerView.setAdapter(recordAdapter);
         if (googleApiClient == null) {
             // Create the API client and bind it to an instance variable.
