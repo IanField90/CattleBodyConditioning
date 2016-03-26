@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name"
-                android:id="@+id/nameEditText"
+                android:id="@+id/name"
                 android:imeOptions="actionDone"
                 android:maxLines="1"
                 android:inputType="textCapWords" />
@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtScoringDate"
+            android:id="@+id/scoringDate"
             tools:text="01/01/2016"
             android:textColor="@android:color/primary_text_light"
             />
@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtExpectedCalvingDate"
+            android:id="@+id/expectedCalvingDate"
             tools:text="01/01/2016"
             android:textColor="@android:color/primary_text_light"
             />
@@ -65,7 +65,7 @@
             android:layout_marginTop="50dp"
             android:layout_gravity="center_horizontal"
             android:text="@string/next"
-            android:id="@+id/btnNext"
+            android:id="@+id/next"
             />
 
     </LinearLayout>

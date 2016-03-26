@@ -31,8 +31,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
+    @Override public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
         try {
             Log.i(TAG, "onCreate");
             TableUtils.createTable(connectionSource, Record.class);
@@ -43,8 +42,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
+    @Override public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
 //        try {
 //            if (oldVersion < 2) {
 //
@@ -75,8 +73,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     /**
      * Close the database connections and clear any cached DAOs.
      */
-    @Override
-    public void close() {
+    @Override public void close() {
         super.close();
         recordDao = null;
         scoreDao = null;

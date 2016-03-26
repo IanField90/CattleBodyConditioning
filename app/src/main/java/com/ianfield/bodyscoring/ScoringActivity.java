@@ -19,13 +19,11 @@ import butterknife.ButterKnife;
 public class ScoringActivity extends AppCompatActivity {
     private static final String TAG = "ScoringActivity";
 
-    @Bind(R.id.recyclerView)
-    RecyclerView recyclerView;
+    @Bind(R.id.recyclerView) RecyclerView recyclerView;
 
     Record record;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scoring);
         ButterKnife.bind(this);
@@ -50,15 +48,13 @@ public class ScoringActivity extends AppCompatActivity {
         );
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_scoring, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_done:
                 done();

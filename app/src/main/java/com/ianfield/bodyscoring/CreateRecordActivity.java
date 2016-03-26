@@ -24,27 +24,23 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     public static final String PLANNED_CALVING_DATE_PICKER = "planned_calving_date_picker";
     public static final String SCORING_DATE_PICKER = "scoring_date_picker";
 
-    @Bind(R.id.txtScoringDate)
-    TextView dateText;
+    @Bind(R.id.scoringDate) TextView scoringDate;
 
-    @Bind(R.id.txtExpectedCalvingDate)
-    TextView expectedCalvingDateText;
+    @Bind(R.id.expectedCalvingDate) TextView expectedCalvingDate;
 
-    @Bind(R.id.nameEditText)
-    EditText nameEdit;
+    @Bind(R.id.name) EditText name;
 
     Record record = new Record();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_record);
         ButterKnife.bind(this);
         Date today = new Date();
         record.setPlannedCalvingDate(today);
         record.setScoringDate(today);
-        dateText.setText(DateUtils.dateToString(new Date()));
-        expectedCalvingDateText.setText(DateUtils.dateToString(new Date()));
+        scoringDate.setText(DateUtils.dateToString(new Date()));
+        expectedCalvingDate.setText(DateUtils.dateToString(new Date()));
     }
 
     Calendar todaysDatePickerCaldendar = Calendar.getInstance();
@@ -63,19 +59,16 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
             expectedDatePickerCaldendar.get(Calendar.DAY_OF_MONTH)
     );
 
-    @OnClick(R.id.txtScoringDate)
-    public void clickSetDate() {
+    @OnClick(R.id.scoringDate) public void clickSetDate() {
         todaysDatePickerDialog.show(getFragmentManager(), SCORING_DATE_PICKER);
     }
 
-    @OnClick(R.id.txtExpectedCalvingDate)
-    public void clickSetExpectedDate() {
+    @OnClick(R.id.expectedCalvingDate) public void clickSetExpectedDate() {
         expectedDatePickerDialog.show(getFragmentManager(), PLANNED_CALVING_DATE_PICKER);
     }
 
-    @OnClick(R.id.btnNext)
-    public void clickNext() {
-        record.setName(nameEdit.getText().toString());
+    @OnClick(R.id.next) public void clickNext() {
+        record.setName(name.getText().toString());
         if (record.isValid()) {
             saveRecordAndLaunchScoring();
         } else {
@@ -99,8 +92,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         finish();
     }
 
-    @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth)  {
+    @Override public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth)  {
         Calendar date = Calendar.getInstance();
         date.set(Calendar.YEAR, year);
         date.set(Calendar.MONTH, monthOfYear);
@@ -108,10 +100,10 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
 
         if (view == todaysDatePickerDialog) {
             record.setScoringDate(date.getTime());
-            dateText.setText(DateUtils.dateToString(date.getTime()));
+            scoringDate.setText(DateUtils.dateToString(date.getTime()));
         } else {
             record.setPlannedCalvingDate(date.getTime());
-            expectedCalvingDateText.setText(DateUtils.dateToString(date.getTime()));
+            expectedCalvingDate.setText(DateUtils.dateToString(date.getTime()));
         }
     }
 }

@@ -59,8 +59,7 @@ public class ScoreView extends LinearLayout {
         scoreText.setText(String.valueOf(this.score));
     }
 
-    @Override
-    protected void onFinishInflate() {
+    @Override protected void onFinishInflate() {
         super.onFinishInflate();
         subtractButton = (Button) this.findViewById(R.id.subtract_button);
         addButton = (Button) this.findViewById(R.id.add_button);

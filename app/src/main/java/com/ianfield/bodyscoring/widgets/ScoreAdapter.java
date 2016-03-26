@@ -22,21 +22,18 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
         this.dataset = dataset;
     }
 
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    @Override public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.score_container, parent, false);
         return new ViewHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    @Override public void onBindViewHolder(ViewHolder holder, int position) {
         Score dataItem = dataset.get(position);
         holder.scoreView.setCount(dataItem.getCount());
         holder.scoreView.setScore(dataItem.getScore());
     }
 
-    @Override
-    public int getItemCount() {
+    @Override public int getItemCount() {
         return dataset.size();
     }
 

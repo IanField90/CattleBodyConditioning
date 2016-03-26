@@ -12,19 +12,16 @@ import butterknife.ButterKnife;
  * Created by ianfield on 01/03/2016.
  */
 public class ViewRecordActivity extends AppCompatActivity {
-    @Bind(R.id.name)
-    TextView name;
+    @Bind(R.id.name) TextView name;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_record);
         ButterKnife.bind(this);
         name.setText(getIntent().getStringExtra("name"));
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
@@ -34,8 +31,7 @@ public class ViewRecordActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
+    @Override public void onBackPressed() {
         supportFinishAfterTransition();
         super.onBackPressed();
     }

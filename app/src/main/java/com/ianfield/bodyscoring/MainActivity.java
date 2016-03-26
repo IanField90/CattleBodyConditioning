@@ -34,13 +34,11 @@ public class MainActivity extends AppCompatActivity
     private static final int REQUEST_CODE_CREATOR = 2;
     private static final int REQUEST_CODE_RESOLUTION = 3;
 
-    @Bind(R.id.savedList)
-    RecyclerView recyclerView;
+    @Bind(R.id.savedList) RecyclerView recyclerView;
 
     private RecordAdapter recordAdapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -50,12 +48,10 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    @Override
-    protected void onResume() {
+    @Override protected void onResume() {
         super.onResume();
         recordAdapter = new RecordAdapter(RecordManager.getAllRecords(this), new RecordAdapter.OnRecordActionListener() {
-            @Override
-            public void onView(int position, TextView name) {
+            @Override public void onView(int position, TextView name) {
                 Intent intent = new Intent(MainActivity.this, ViewRecordActivity.class);
                 intent.putExtra("name", name.getText().toString());
                 ActivityOptionsCompat options = ActivityOptionsCompat.
@@ -63,15 +59,9 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent, options.toBundle());
             }
 
-            @Override
-            public void onEdit(int position) {
+            @Override public void onEdit(int position) { }
 
-            }
-
-            @Override
-            public void onDelete(int position) {
-
-            }
+            @Override public void onDelete(int position) { }
         });
         recyclerView.setAdapter(recordAdapter);
         if (googleApiClient == null) {
@@ -89,8 +79,7 @@ public class MainActivity extends AppCompatActivity
 //        googleApiClient.connect();
     }
 
-    @Override
-    protected void onPause() {
+    @Override protected void onPause() {
         if (googleApiClient != null && googleApiClient.isConnected()) {
             googleApiClient.disconnect();
         }
@@ -98,20 +87,17 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @OnClick(R.id.fabNew)
-    public void fabNewClick() {
+    @OnClick(R.id.fabNew) public void fabNewClick() {
         startActivity(new Intent(this, CreateRecordActivity.class));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
                 actionSettingsClicked();
@@ -126,18 +112,15 @@ public class MainActivity extends AppCompatActivity
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
-    @Override
-    public void onConnected(Bundle bundle) {
+    @Override public void onConnected(Bundle bundle) {
         // save the file
     }
 
-    @Override
-    public void onConnectionSuspended(int i) {
+    @Override public void onConnectionSuspended(int i) {
         Log.d(TAG, "onConnectionSuspended: ");
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult result) {
+    @Override public void onConnectionFailed(@NonNull ConnectionResult result) {
         // Called whenever the API client fails to connect.
         Log.i(TAG, "GoogleApiClient connection failed: " + result.toString());
         if (!result.hasResolution()) {
@@ -155,8 +138,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+    @Override protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 //        switch (requestCode) {
 //            case RESOLVE_CONNECTION_REQUEST_CODE:
 //                if (resultCode == RESULT_OK) {

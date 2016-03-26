@@ -22,8 +22,7 @@ import java.util.Date;
 public class Record {
     public enum Setting { UK, NZ }
 
-    @DatabaseField(generatedId = true)
-    int id;
+    @DatabaseField(generatedId = true) int id;
 
     @DatabaseField String name;
     @DatabaseField Date plannedCalvingDate;
