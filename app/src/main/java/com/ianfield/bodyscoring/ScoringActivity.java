@@ -13,13 +13,13 @@ import com.ianfield.bodyscoring.managers.RecordManager;
 import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.widgets.ScoreAdapter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ScoringActivity extends AppCompatActivity {
     private static final String TAG = "ScoringActivity";
 
-    @Bind(R.id.recyclerView) RecyclerView recyclerView;
+    @BindView(R.id.recyclerView) RecyclerView recyclerView;
 
     Record record;
 

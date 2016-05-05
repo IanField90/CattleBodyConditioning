@@ -21,7 +21,7 @@ import com.google.android.gms.drive.Drive;
 import com.ianfield.bodyscoring.managers.RecordManager;
 import com.ianfield.bodyscoring.widgets.RecordAdapter;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity
     private static final int REQUEST_CODE_CREATOR = 2;
     private static final int REQUEST_CODE_RESOLUTION = 3;
 
-    @Bind(R.id.savedList) RecyclerView recyclerView;
+    @BindView(R.id.savedList) RecyclerView recyclerView;
 
     private RecordAdapter recordAdapter;
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
     @Override protected void onResume() {
         super.onResume();
         recordAdapter = new RecordAdapter(RecordManager.getAllRecords(this), new RecordAdapter.OnRecordActionListener() {
-            @Override public void onView(int position, TextView name) {
+            @Override public void onView(int recordId, TextView name) {
                 Intent intent = new Intent(MainActivity.this, ViewRecordActivity.class);
                 intent.putExtra("name", name.getText().toString());
                 ActivityOptionsCompat options = ActivityOptionsCompat.
@@ -59,7 +59,11 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent, options.toBundle());
             }
 
-            @Override public void onEdit(int position) { }
+            @Override public void onEdit(int recordId) {
+                Intent intent = new Intent(MainActivity.this, ScoringActivity.class);
+                intent.putExtra(getString(R.string.extra_record_id), recordId);
+                startActivity(intent);
+            }
 
             @Override public void onDelete(int position) { }
         });

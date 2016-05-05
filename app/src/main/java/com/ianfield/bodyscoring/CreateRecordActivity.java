@@ -16,7 +16,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import java.util.Calendar;
 import java.util.Date;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -24,11 +24,11 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     public static final String PLANNED_CALVING_DATE_PICKER = "planned_calving_date_picker";
     public static final String SCORING_DATE_PICKER = "scoring_date_picker";
 
-    @Bind(R.id.scoringDate) TextView scoringDate;
+    @BindView(R.id.scoringDate) TextView scoringDate;
 
-    @Bind(R.id.expectedCalvingDate) TextView expectedCalvingDate;
+    @BindView(R.id.expectedCalvingDate) TextView expectedCalvingDate;
 
-    @Bind(R.id.name) EditText name;
+    @BindView(R.id.name) EditText name;
 
     Record record = new Record();
 

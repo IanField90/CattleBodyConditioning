@@ -5,14 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * Created by ianfield on 01/03/2016.
  */
 public class ViewRecordActivity extends AppCompatActivity {
-    @Bind(R.id.name) TextView name;
+    @BindView(R.id.name) TextView name;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

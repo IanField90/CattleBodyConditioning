@@ -11,6 +11,9 @@ import com.ianfield.bodyscoring.models.Score;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Ian Field on 1/20/16.
  * TODO score change callback to update DB
@@ -38,12 +41,11 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView cardView;
-        public ScoreView scoreView;
+        @BindView(R.id.cardView) public CardView cardView;
+        @BindView(R.id.scoreView) public ScoreView scoreView;
         public ViewHolder(View container) {
             super(container);
-            cardView = (CardView) container.findViewById(R.id.cardView);
-            scoreView = (ScoreView) cardView.findViewById(R.id.scoreView);
+            ButterKnife.bind(this, container);
         }
     }
 

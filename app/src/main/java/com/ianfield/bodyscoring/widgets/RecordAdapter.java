@@ -14,6 +14,9 @@ import com.ianfield.bodyscoring.models.Record;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Ian Field on 1/20/16.
  */
@@ -33,16 +36,22 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Record record = records.get(position);
+        final Record record = records.get(position);
         holder.name.setText(record.getName());
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.onView(holder.getAdapterPosition(), holder.name);
+        if (listener != null) {
+            holder.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onView(record.getId(), holder.name);
                 }
-            }
-        });
+            });
+            holder.edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onEdit(record.getId());
+                }
+            });
+        }
     }
 
     @Override
@@ -52,17 +61,14 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CardView cardView;
-        public TextView name;
-        public Button view;
-        public Button edit;
-        public Button delete;
+        @BindView(R.id.name) public TextView name;
+        @BindView(R.id.view) public Button view;
+        @BindView(R.id.edit) public Button edit;
+        @BindView(R.id.delete) public Button delete;
         public ViewHolder(View container) {
             super(container);
             cardView = (CardView) container;
-            name = (TextView) cardView.findViewById(R.id.name);
-            view = (Button) cardView.findViewById(R.id.view);
-            edit = (Button) cardView.findViewById(R.id.edit);
-            delete = (Button) cardView.findViewById(R.id.delete);
+            ButterKnife.bind(this, container);
         }
     }
 

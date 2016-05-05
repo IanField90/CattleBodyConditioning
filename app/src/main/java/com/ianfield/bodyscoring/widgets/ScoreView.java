@@ -10,15 +10,18 @@ import android.widget.TextView;
 
 import com.ianfield.bodyscoring.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Ian Field on 13/01/2016.
  */
 public class ScoreView extends LinearLayout {
 
-    private Button subtractButton;
-    private Button addButton;
-    private TextView countText;
-    private TextView scoreText;
+    @BindView(R.id.subtract_button) Button subtractButton;
+    @BindView(R.id.add_button) Button addButton;
+    @BindView(R.id.count_text) TextView countText;
+    @BindView(R.id.score) TextView scoreText;
     private double score = 0;
     private int count = 0;
 
@@ -40,8 +43,7 @@ public class ScoreView extends LinearLayout {
     /**
      * Inflates the views in the layout.
      *
-     * @param context
-     *           the current context for the view.
+     * @param context the current context for the view.
      */
     private void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
@@ -52,6 +54,11 @@ public class ScoreView extends LinearLayout {
     public void setCount(int count) {
         this.count = count;
         countText.setText(String.valueOf(this.count));
+        if (count == 0) {
+            subtractButton.setEnabled(false);
+        } else if (count > 0) {
+            subtractButton.setEnabled(true);
+        }
     }
 
     public void setScore(double score) {
@@ -61,10 +68,7 @@ public class ScoreView extends LinearLayout {
 
     @Override protected void onFinishInflate() {
         super.onFinishInflate();
-        subtractButton = (Button) this.findViewById(R.id.subtract_button);
-        addButton = (Button) this.findViewById(R.id.add_button);
-        countText = (TextView) this.findViewById(R.id.count_text);
-        scoreText = (TextView) this.findViewById(R.id.score);
+        ButterKnife.bind(this);
         scoreText.setText(String.valueOf(score));
 
         if (count == 0) {
@@ -74,11 +78,7 @@ public class ScoreView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 count++;
-                countText.setText(String.valueOf(count));
-
-                if (count > 0) {
-                    subtractButton.setEnabled(true);
-                }
+                setCount(count);
             }
         });
 
@@ -87,11 +87,7 @@ public class ScoreView extends LinearLayout {
             public void onClick(View v) {
                 if (count > 0) {
                     count--;
-                    countText.setText(String.valueOf(count));
-
-                    if (count == 0) {
-                        subtractButton.setEnabled(false);
-                    }
+                    setCount(count);
                 }
             }
         });
