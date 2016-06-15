@@ -31,9 +31,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
     }
 
     @Override public void onBindViewHolder(ViewHolder holder, int position) {
-        Score dataItem = dataset.get(position);
-        holder.scoreView.setCount(dataItem.getCount());
-        holder.scoreView.setScore(dataItem.getScore());
+        holder.scoreView.setScore(dataset.get(position));
     }
 
     @Override public int getItemCount() {

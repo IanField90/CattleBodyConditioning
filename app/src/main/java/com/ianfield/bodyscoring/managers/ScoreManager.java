@@ -1,6 +1,7 @@
 package com.ianfield.bodyscoring.managers;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.models.Score;
@@ -14,6 +15,8 @@ import java.sql.SQLException;
  */
 public class ScoreManager {
 
+    private static final String TAG = "ScoreManager";
+
     public static Score createScore(Context context, Record record, double score) {
         DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
         try {
@@ -23,7 +26,18 @@ public class ScoreManager {
             scoreRecord.setCount(0);
             helper.getScoreDao().create(scoreRecord);
             return scoreRecord;
-        } catch (SQLException ignore) { }
+        } catch (SQLException e) {
+            Log.e(TAG, "createScore: failed", e);
+        }
         return null;
+    }
+
+    public static void updateCount(Context context, Score scoreData) {
+        DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
+        try {
+            helper.getScoreDao().update(scoreData);
+        } catch (SQLException e) {
+            Log.e(TAG, "updateCount: failed", e);
+        }
     }
 }

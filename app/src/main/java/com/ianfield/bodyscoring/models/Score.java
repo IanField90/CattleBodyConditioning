@@ -8,6 +8,8 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "scores")
 public class Score {
+    @DatabaseField(generatedId = true) int id;
+
     @DatabaseField(foreign = true, columnName = "record_id") Record record;
 
     @DatabaseField double score;

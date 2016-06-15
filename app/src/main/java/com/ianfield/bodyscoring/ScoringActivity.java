@@ -37,7 +37,6 @@ public class ScoringActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         Log.d(TAG, "onCreate: " + adapter.getItemCount());
-        adapter.getItemCount();
     }
 
     private void retrieveRecord() {

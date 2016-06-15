@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ianfield.bodyscoring.R;
+import com.ianfield.bodyscoring.managers.ScoreManager;
+import com.ianfield.bodyscoring.models.Score;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,8 +24,7 @@ public class ScoreView extends LinearLayout {
     @BindView(R.id.add_button) Button addButton;
     @BindView(R.id.count_text) TextView countText;
     @BindView(R.id.score) TextView scoreText;
-    private double score = 0;
-    private int count = 0;
+    private Score score;
 
     public ScoreView(Context context) {
         super(context);
@@ -51,46 +52,52 @@ public class ScoreView extends LinearLayout {
         inflater.inflate(R.layout.score_view, this);
     }
 
-    public void setCount(int count) {
-        this.count = count;
-        countText.setText(String.valueOf(this.count));
+    private void setCount(int count, boolean update) {
+        score.setCount(count);
+        countText.setText(String.valueOf(score.getCount()));
         if (count == 0) {
             subtractButton.setEnabled(false);
         } else if (count > 0) {
             subtractButton.setEnabled(true);
         }
+        if (update) {
+            ScoreManager.updateCount(getContext(), score);
+        }
     }
 
-    public void setScore(double score) {
-        this.score = score;
-        scoreText.setText(String.valueOf(this.score));
+    private void setScore(double score) {
+        this.score.setScore(score);
+        scoreText.setText(String.valueOf(this.score.getScore()));
     }
 
     @Override protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.bind(this);
-        scoreText.setText(String.valueOf(score));
+    }
 
-        if (count == 0) {
+    public void setScore(Score score) {
+        this.score = score;
+        setScore(score.getScore());
+        setCount(score.getCount(), false);
+        scoreText.setText(String.valueOf(score.getScore()));
+
+        if (score.getCount() == 0) {
             subtractButton.setEnabled(false);
         }
         addButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                count++;
-                setCount(count);
+                setCount(ScoreView.this.score.getCount() + 1, true);
             }
         });
 
         subtractButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (count > 0) {
-                    count--;
-                    setCount(count);
+                if (ScoreView.this.score.getCount() > 0) {
+                    setCount(ScoreView.this.score.getCount() - 1, true);
                 }
             }
         });
     }
-
 }
