@@ -28,6 +28,10 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         this.listener = listener;
     }
 
+    public ArrayList<Record> getRecords() {
+        return records;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.record_view, parent, false);
@@ -35,7 +39,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Record record = records.get(position);
         holder.name.setText(record.getName());
         if (listener != null) {
@@ -49,6 +53,13 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
                 @Override
                 public void onClick(View v) {
                     listener.onEdit(record.getId());
+                }
+            });
+            holder.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    listener.onDelete(record, position);
                 }
             });
         }
@@ -77,6 +88,6 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
         void onEdit(int position);
 
-        void onDelete(int position);
+        void onDelete(Record record, int position);
     }
 }

@@ -19,6 +19,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.drive.Drive;
 import com.ianfield.bodyscoring.managers.RecordManager;
+import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.widgets.RecordAdapter;
 
 import butterknife.BindView;
@@ -65,7 +66,12 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
 
-            @Override public void onDelete(int position) { }
+            @Override public void onDelete(Record record, int position) {
+                recordAdapter.getRecords().remove(record);
+                RecordManager.deleteRecord(MainActivity.this, record);
+                recordAdapter.notifyItemRemoved(position);
+                recordAdapter.notifyItemRangeChanged(position, recordAdapter.getRecords().size());
+            }
         });
         recyclerView.setAdapter(recordAdapter);
         if (googleApiClient == null) {

@@ -60,4 +60,10 @@ public class RecordManager {
         return null;
     }
 
+    public static void deleteRecord(Context context, Record record) {
+        DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
+        try {
+            helper.getRecordDao().delete(record);
+        } catch (SQLException ignore) {}
+    }
 }
