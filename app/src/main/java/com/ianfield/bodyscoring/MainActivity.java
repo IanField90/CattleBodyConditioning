@@ -5,6 +5,7 @@ import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -25,6 +27,8 @@ import com.ianfield.bodyscoring.widgets.RecordAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static android.support.v4.app.ActivityOptionsCompat.*;
 
 public class MainActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -52,11 +56,17 @@ public class MainActivity extends AppCompatActivity
     @Override protected void onResume() {
         super.onResume();
         recordAdapter = new RecordAdapter(RecordManager.getAllRecords(), new RecordAdapter.OnRecordActionListener() {
-            @Override public void onView(String recordId, TextView name) {
+            @Override public void onView(String recordId, TextView name, TextView recordedDate, TextView dueDate) {
                 Intent intent = new Intent(MainActivity.this, ViewRecordActivity.class);
                 intent.putExtra("name", name.getText().toString());
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(MainActivity.this, name, "name");
+                intent.putExtra("planned_calving_date", dueDate.getText().toString());
+                intent.putExtra("date", recordedDate.getText().toString());
+                ActivityOptionsCompat options = makeSceneTransitionAnimation(
+                        MainActivity.this,
+                        Pair.create((View) name, "name"),
+                        Pair.create((View) recordedDate, "date"),
+                        Pair.create((View) dueDate, "planned_calving_date")
+                );
                 startActivity(intent, options.toBundle());
             }
 

@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.ianfield.bodyscoring.R;
 import com.ianfield.bodyscoring.models.Record;
 
+import java.text.SimpleDateFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmResults;
@@ -22,6 +24,7 @@ import io.realm.RealmResults;
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
     RealmResults<Record> records;
     OnRecordActionListener listener;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     public RecordAdapter(@Nullable RealmResults<Record> records, @Nullable OnRecordActionListener listener) {
         this.records = records;
         this.listener = listener;
@@ -38,14 +41,16 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final Record record = records.get(position);
         holder.name.setText(record.getName());
+        holder.date.setText("Recorded: " + dateFormat.format(record.getScoringDate()));
+        holder.plannedCalving.setText("Planned: " + dateFormat.format(record.getPlannedCalvingDate()));
         if (listener != null) {
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onView(record.getId(), holder.name);
+                    listener.onView(record.getId(), holder.name, holder.date, holder.plannedCalving);
                 }
             });
             holder.edit.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +62,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             holder.delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    listener.onDelete(record, position);
+                    listener.onDelete(record, holder.getAdapterPosition());
                 }
             });
         }
@@ -75,6 +79,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         @BindView(R.id.view) public Button view;
         @BindView(R.id.edit) public Button edit;
         @BindView(R.id.delete) public Button delete;
+        @BindView(R.id.date) public TextView date;
+        @BindView(R.id.planned_calving) public TextView plannedCalving;
         public ViewHolder(View container) {
             super(container);
             cardView = (CardView) container;
@@ -83,7 +89,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     }
 
     public interface OnRecordActionListener {
-        void onView(String id, TextView name);
+        void onView(String id, TextView name, TextView date, TextView plannedCalving);
 
         void onEdit(String id);
 

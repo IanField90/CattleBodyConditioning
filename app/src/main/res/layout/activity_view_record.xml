@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,8 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingEnd="@dimen/activity_horizontal_margin"
-    >
+    android:paddingEnd="@dimen/activity_horizontal_margin">
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,4 +19,24 @@
         android:textColor="@android:color/black"
         android:transitionName="name"
         android:id="@+id/name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="Planned: 05/08/2016"
+        android:id="@+id/planned_calving"
+        android:gravity="center_horizontal"
+        android:transitionName="planned_calving_date"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        tools:text="Scored: 05/08/2016"
+        android:id="@+id/date"
+        android:gravity="center_horizontal"
+        android:transitionName="date"
+        />
 </LinearLayout>

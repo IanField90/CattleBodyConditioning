@@ -13,12 +13,16 @@ import butterknife.ButterKnife;
  */
 public class ViewRecordActivity extends AppCompatActivity {
     @BindView(R.id.name) TextView name;
+    @BindView(R.id.planned_calving) TextView plannedCalving;
+    @BindView(R.id.date) TextView date;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_record);
         ButterKnife.bind(this);
         name.setText(getIntent().getStringExtra("name"));
+        plannedCalving.setText(getIntent().getStringExtra("planned_calving_date"));
+        date.setText(getIntent().getStringExtra("date"));
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
