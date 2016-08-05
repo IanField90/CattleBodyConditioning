@@ -12,7 +12,6 @@ import com.facebook.stetho.Stetho;
 import com.ianfield.bodyscoring.di.AppComponent;
 import com.ianfield.bodyscoring.di.AppModule;
 import com.ianfield.bodyscoring.di.DaggerAppComponent;
-import com.squareup.leakcanary.LeakCanary;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +29,7 @@ public class BaseApplication extends Application {
     @CallSuper @Override public void onCreate() {
         super.onCreate();
 
-        LeakCanary.install(this);
+//        LeakCanary.install(this);
 
         component = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
