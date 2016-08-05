@@ -9,11 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ianfield.bodyscoring.R;
-import com.ianfield.bodyscoring.managers.ScoreManager;
 import com.ianfield.bodyscoring.models.Score;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 /**
  * Created by Ian Field on 13/01/2016.
@@ -52,22 +52,17 @@ public class ScoreView extends LinearLayout {
         inflater.inflate(R.layout.score_view, this);
     }
 
-    private void setCount(int count, boolean update) {
+    private void setCount(int count) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
         score.setCount(count);
+        realm.commitTransaction();
         countText.setText(String.valueOf(score.getCount()));
         if (count == 0) {
             subtractButton.setEnabled(false);
         } else if (count > 0) {
             subtractButton.setEnabled(true);
         }
-        if (update) {
-            ScoreManager.updateCount(getContext(), score);
-        }
-    }
-
-    private void setScore(double score) {
-        this.score.setScore(score);
-        scoreText.setText(String.valueOf(this.score.getScore()));
     }
 
     @Override protected void onFinishInflate() {
@@ -77,8 +72,6 @@ public class ScoreView extends LinearLayout {
 
     public void setScore(Score score) {
         this.score = score;
-        setScore(score.getScore());
-        setCount(score.getCount(), false);
         scoreText.setText(String.valueOf(score.getScore()));
 
         if (score.getCount() == 0) {
@@ -87,7 +80,7 @@ public class ScoreView extends LinearLayout {
         addButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                setCount(ScoreView.this.score.getCount() + 1, true);
+                setCount(ScoreView.this.score.getCount() + 1);
             }
         });
 
@@ -95,7 +88,7 @@ public class ScoreView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 if (ScoreView.this.score.getCount() > 0) {
-                    setCount(ScoreView.this.score.getCount() - 1, true);
+                    setCount(ScoreView.this.score.getCount() - 1);
                 }
             }
         });

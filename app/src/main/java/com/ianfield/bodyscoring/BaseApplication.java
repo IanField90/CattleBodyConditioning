@@ -19,6 +19,8 @@ import org.json.JSONObject;
 import java.util.Set;
 
 import io.fabric.sdk.android.Fabric;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class BaseApplication extends Application {
 
@@ -30,6 +32,9 @@ public class BaseApplication extends Application {
         super.onCreate();
 
 //        LeakCanary.install(this);
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder(this)
+                .build();
+        Realm.setDefaultConfiguration(realmConfig);
 
         component = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))

@@ -2,13 +2,14 @@ package com.ianfield.bodyscoring.models;
 
 import android.text.TextUtils;
 
-import com.j256.ormlite.dao.ForeignCollection;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
-import com.j256.ormlite.table.DatabaseTable;
+import com.ianfield.bodyscoring.utils.Setting;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
+
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Ian Field on 09/01/2016.
@@ -18,20 +19,20 @@ import java.util.Date;
  * 2. Pre-calving ( 3 weeks pre-calving)
  * 3. Pre-service
  */
-@DatabaseTable(tableName = "records")
-public class Record {
-    public enum Setting { UK, NZ }
+public class Record extends RealmObject {
+    @PrimaryKey
+    String id;
+    String name;
+    Date plannedCalvingDate;
+    Date scoringDate;
+    String setting;
+    RealmList<Score> scores;// = new RealmList<>();
 
-    @DatabaseField(generatedId = true) int id;
+    public Record() {
+        this.id = UUID.randomUUID().toString();
+    }
 
-    @DatabaseField String name;
-    @DatabaseField Date plannedCalvingDate;
-    @DatabaseField Date scoringDate;
-    @DatabaseField Setting setting = Setting.UK;
-
-    @ForeignCollectionField(eager = true) private ForeignCollection<Score> scores;
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -60,20 +61,24 @@ public class Record {
     }
 
 
-    public Setting getSetting() {
+    public @Setting.Country String getSetting() {
         return setting;
     }
 
-    public void setSetting(Setting setting) {
+    public void setSetting(@Setting.Country String setting) {
         this.setting = setting;
     }
 
-    public boolean isValid() {
+    public boolean isValidRecord() {
         return (plannedCalvingDate != null && scoringDate != null && !TextUtils.isEmpty(name));
     }
 
-    public ArrayList<Score> getScores() {
-        return new ArrayList<>(this.scores);
+    public void setScores(RealmList<Score> scores) {
+        this.scores = scores;
+    }
+
+    public RealmList<Score> getScores() {
+        return scores;
     }
 
 //    public String toSummary() {

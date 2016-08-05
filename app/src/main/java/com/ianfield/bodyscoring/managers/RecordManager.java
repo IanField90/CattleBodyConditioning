@@ -1,69 +1,58 @@
 package com.ianfield.bodyscoring.managers;
 
-import android.content.Context;
-
 import com.ianfield.bodyscoring.models.Record;
-import com.ianfield.bodyscoring.utils.DatabaseHelper;
+import com.ianfield.bodyscoring.models.Score;
 import com.ianfield.bodyscoring.utils.ScoreScale;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.ianfield.bodyscoring.utils.Setting;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 /**
  * Created by Ian on 14/01/2016.
  */
 public class RecordManager {
 
-    public static Record createRecord(Context context, Record record) {
-        DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
-        try {
-            helper.getRecordDao().create(record);
+    public static Record createRecord(Record record) {
 
-            // TODO possibly perform this in a batch loop for performance
-            double[] scoreScale;
-            switch (record.getSetting()) {
-                case NZ:
-                    scoreScale = ScoreScale.NZ_SCORE_SCALE;
-                    break;
-                case UK:
-                    scoreScale = ScoreScale.UK_SCORE_SCALE;
-                    break;
+        ArrayList<Score> scores = new ArrayList<>();
 
-                default:
-                    scoreScale = ScoreScale.UK_SCORE_SCALE;
-            }
+        double[] scoreScale = (record.getSetting() != null && record.getSetting().equals(Setting.NZ)) ? ScoreScale.NZ_SCORE_SCALE : ScoreScale.UK_SCORE_SCALE;
+        for (double score : scoreScale) {
+            scores.add(ScoreManager.createScore(score));
+        }
 
-            for (double score : scoreScale) {
-                ScoreManager.createScore(context, record, score);
-            }
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        record = realm.copyToRealm(record);
+        for (Score score : scores) {
+            realm.copyToRealm(score);
+            record.getScores().add(score);
+        }
+        realm.commitTransaction();
 
-            helper.getRecordDao().refresh(record);
-            return record;
-        } catch (SQLException ignore) { }
-        return null;
+        return record;
     }
 
-    public static Record getRecordById(Context context, int id) {
-        DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
-        try {
-            return helper.getRecordDao().queryForId(id);
-        } catch (SQLException ignore) { }
-        return null;
+    public static Record getRecordById(String id) {
+        return Realm.getDefaultInstance()
+                .where(Record.class)
+                .equalTo("id", id)
+                .findFirst();
     }
 
-    public static ArrayList<Record> getAllRecords(Context context) {
-        DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
-        try {
-            return new ArrayList<>(helper.getRecordDao().queryForAll());
-        } catch (SQLException ignore) { }
-        return null;
+    public static RealmResults<Record> getAllRecords() {
+        return Realm.getDefaultInstance()
+                .where(Record.class)
+                .findAll();
     }
 
-    public static void deleteRecord(Context context, Record record) {
-        DatabaseHelper helper = OpenHelperManager.getHelper(context, DatabaseHelper.class);
-        try {
-            helper.getRecordDao().delete(record);
-        } catch (SQLException ignore) {}
+    public static void deleteRecord(Record record) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        record.deleteFromRealm();
+        realm.commitTransaction();
     }
 }

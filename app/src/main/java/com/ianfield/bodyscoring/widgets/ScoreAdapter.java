@@ -9,19 +9,18 @@ import android.view.ViewGroup;
 import com.ianfield.bodyscoring.R;
 import com.ianfield.bodyscoring.models.Score;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmList;
 
 /**
  * Created by Ian Field on 1/20/16.
  * TODO score change callback to update DB
  */
 public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> {
-    private ArrayList<Score> dataset;
+    private RealmList<Score> dataset;
 
-    public ScoreAdapter(ArrayList<Score> dataset) {
+    public ScoreAdapter(RealmList<Score> dataset) {
         this.dataset = dataset;
     }
 

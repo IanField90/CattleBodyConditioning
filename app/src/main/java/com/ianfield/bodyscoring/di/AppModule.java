@@ -2,8 +2,6 @@ package com.ianfield.bodyscoring.di;
 import android.content.Context;
 
 import com.ianfield.bodyscoring.BaseApplication;
-import com.ianfield.bodyscoring.utils.DatabaseHelper;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -33,10 +31,6 @@ import dagger.Provides;
     @Provides @Singleton @ApplicationContext
     Context provideContext() {
         return application;
-    }
-
-    @Provides @Singleton DatabaseHelper providesDatabaseHelper() {
-        return OpenHelperManager.getHelper(application, DatabaseHelper.class);
     }
 
     @Qualifier @Documented @Retention(RetentionPolicy.RUNTIME) public @interface ApplicationContext {

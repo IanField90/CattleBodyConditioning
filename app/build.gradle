@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'io.fabric'
+apply plugin: 'realm-android'
 
 repositories {
     jcenter()
@@ -48,14 +49,10 @@ dependencies {
     compile 'com.google.android.gms:play-services-base:9.4.0'
     compile 'com.google.android.gms:play-services-drive:9.4.0'
 
-//    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
 
-    compile 'com.j256.ormlite:ormlite-android:4.48'
-
-//    compile 'frankiesardo:icepick:3.2.0'
-//    provided 'frankiesardo:icepick-processor:3.2.0'
-
-//    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'io.reactivex:rxjava:1.1.6'
+    compile 'io.reactivex:rxandroid:1.2.0'
 
     // Crashlytics
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {

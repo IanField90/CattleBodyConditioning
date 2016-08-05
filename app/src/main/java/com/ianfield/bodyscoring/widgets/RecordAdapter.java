@@ -12,23 +12,22 @@ import android.widget.TextView;
 import com.ianfield.bodyscoring.R;
 import com.ianfield.bodyscoring.models.Record;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmResults;
 
 /**
  * Created by Ian Field on 1/20/16.
  */
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
-    ArrayList<Record> records;
+    RealmResults<Record> records;
     OnRecordActionListener listener;
-    public RecordAdapter(ArrayList<Record> records, @Nullable OnRecordActionListener listener) {
+    public RecordAdapter(@Nullable RealmResults<Record> records, @Nullable OnRecordActionListener listener) {
         this.records = records;
         this.listener = listener;
     }
 
-    public ArrayList<Record> getRecords() {
+    public RealmResults<Record> getRecords() {
         return records;
     }
 
@@ -67,7 +66,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return records.size();
+        return records == null ? 0 : records.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -84,9 +83,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     }
 
     public interface OnRecordActionListener {
-        void onView(int position, TextView name);
+        void onView(String id, TextView name);
 
-        void onEdit(int position);
+        void onEdit(String id);
 
         void onDelete(Record record, int position);
     }

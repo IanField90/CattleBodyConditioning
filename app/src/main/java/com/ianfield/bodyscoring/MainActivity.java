@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override protected void onResume() {
         super.onResume();
-        recordAdapter = new RecordAdapter(RecordManager.getAllRecords(this), new RecordAdapter.OnRecordActionListener() {
-            @Override public void onView(int recordId, TextView name) {
+        recordAdapter = new RecordAdapter(RecordManager.getAllRecords(), new RecordAdapter.OnRecordActionListener() {
+            @Override public void onView(String recordId, TextView name) {
                 Intent intent = new Intent(MainActivity.this, ViewRecordActivity.class);
                 intent.putExtra("name", name.getText().toString());
                 ActivityOptionsCompat options = ActivityOptionsCompat.
@@ -60,15 +60,15 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent, options.toBundle());
             }
 
-            @Override public void onEdit(int recordId) {
+            @Override public void onEdit(String recordId) {
                 Intent intent = new Intent(MainActivity.this, ScoringActivity.class);
                 intent.putExtra(getString(R.string.extra_record_id), recordId);
                 startActivity(intent);
             }
 
             @Override public void onDelete(Record record, int position) {
-                recordAdapter.getRecords().remove(record);
-                RecordManager.deleteRecord(MainActivity.this, record);
+//                recordAdapter.getRecords().remove(record);
+                RecordManager.deleteRecord(record);
                 recordAdapter.notifyItemRemoved(position);
                 recordAdapter.notifyItemRangeChanged(position, recordAdapter.getRecords().size());
             }

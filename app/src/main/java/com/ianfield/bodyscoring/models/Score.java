@@ -1,28 +1,15 @@
 package com.ianfield.bodyscoring.models;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import io.realm.RealmObject;
 
 /**
  * Created by Ian on 14/01/2016.
  */
-@DatabaseTable(tableName = "scores")
-public class Score {
-    @DatabaseField(generatedId = true) int id;
+public class Score extends RealmObject {
 
-    @DatabaseField(foreign = true, columnName = "record_id") Record record;
+    double score;
 
-    @DatabaseField double score;
-
-    @DatabaseField(defaultValue = "0") int count = 0;
-
-    public Record getRecord() {
-        return record;
-    }
-
-    public void setRecord(Record record) {
-        this.record = record;
-    }
+    int count = 0;
 
     public double getScore() {
         return score;

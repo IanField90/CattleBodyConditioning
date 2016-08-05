@@ -69,7 +69,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
 
     @OnClick(R.id.next) public void clickNext() {
         record.setName(name.getText().toString());
-        if (record.isValid()) {
+        if (record.isValidRecord()) {
             saveRecordAndLaunchScoring();
         } else {
             final Snackbar snackBar = Snackbar.make(findViewById(android.R.id.content), R.string.snackbar_missing_name, Snackbar.LENGTH_LONG);
@@ -85,7 +85,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     }
 
     private void saveRecordAndLaunchScoring() {
-        record = RecordManager.createRecord(this, record);
+        record = RecordManager.createRecord(record);
         Intent intent = new Intent(this, ScoringActivity.class);
         intent.putExtra(getString(R.string.extra_record_id), record.getId());
         startActivity(intent);
