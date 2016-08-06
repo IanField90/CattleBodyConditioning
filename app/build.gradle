@@ -22,6 +22,14 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        release {
+            storeFile file(this.properties["com.ianfield.bodyscoring.keystore.location"])
+            storePassword this.properties["com.ianfield.bodyscoring.keystore.storepass"]
+            keyPassword this.properties["com.ianfield.bodyscoring.keystore.keypass"]
+            keyAlias this.properties["com.ianfield.bodyscoring.keystore.alias"]
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -51,8 +59,8 @@ dependencies {
 
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
 
-    compile 'io.reactivex:rxjava:1.1.6'
-    compile 'io.reactivex:rxandroid:1.2.0'
+//    compile 'io.reactivex:rxjava:1.1.6'
+//    compile 'io.reactivex:rxandroid:1.2.0'
 
     // Crashlytics
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
