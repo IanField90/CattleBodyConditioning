@@ -73,6 +73,7 @@ public class ScoreView extends LinearLayout {
     public void setScore(Score score) {
         this.score = score;
         scoreText.setText(String.valueOf(score.getScore()));
+        countText.setText(String.valueOf(score.getCount()));
 
         if (score.getCount() == 0) {
             subtractButton.setEnabled(false);
