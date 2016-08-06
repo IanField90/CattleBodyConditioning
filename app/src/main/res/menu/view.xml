@@ -7,4 +7,9 @@
         android:title="@string/save_chart"
         app:showAsAction="always"
         />
+
+    <item android:id="@+id/action_upload"
+        android:title="@string/save_to_drive"
+        app:showAsAction="always"
+        />
 </menu>

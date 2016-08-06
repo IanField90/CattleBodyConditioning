@@ -36,4 +36,6 @@
     <string name="permission_denied">The app was not allowed to write to your storage. Hence, it cannot function properly. Please consider granting it this permission</string>
     <string name="save_failed">Save failed</string>
     <string name="save_success">Save successful</string>
+    <string name="save_to_drive">Save to Drive</string>
+    <string name="error_drive_upload">\"Error while trying to create new file contents\"</string>
 </resources>
