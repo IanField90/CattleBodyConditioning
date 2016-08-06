@@ -13,48 +13,43 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".CreateRecordActivity"
+            android:name=".activity.CreateRecordActivity"
             android:label="@string/title_activity_create_record"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity"
-            />
-
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ScoringActivity"
+            android:name=".activity.ScoringActivity"
             android:label="@string/title_activity_scoring"
-            android:screenOrientation="portrait"
-            />
-
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".SettingsActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".activity.SettingsActivity"
             android:label="@string/settings"
-            android:screenOrientation="portrait"
-            />
-
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ViewRecordActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".activity.ViewRecordActivity"
             android:label="@string/title_activity_view_record"
-            />
+            android:parentActivityName=".activity.MainActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".activity.AboutActivity"
+            android:label="@string/about"
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -1,8 +1,10 @@
-package com.ianfield.bodyscoring;
+package com.ianfield.bodyscoring.activity;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
+
+import com.ianfield.bodyscoring.R;
 
 /**
  * Created by Ian on 09/01/2016.

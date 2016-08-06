@@ -1,4 +1,4 @@
-package com.ianfield.bodyscoring;
+package com.ianfield.bodyscoring.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.text.style.UnderlineSpan;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.ianfield.bodyscoring.R;
+import com.ianfield.bodyscoring.activity.ScoringActivity;
 import com.ianfield.bodyscoring.managers.RecordManager;
 import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.utils.DateUtils;

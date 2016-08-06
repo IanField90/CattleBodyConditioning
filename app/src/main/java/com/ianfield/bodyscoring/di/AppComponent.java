@@ -1,7 +1,7 @@
 package com.ianfield.bodyscoring.di;
 
 import com.ianfield.bodyscoring.BodyConditioningApplication;
-import com.ianfield.bodyscoring.MainActivity;
+import com.ianfield.bodyscoring.activity.MainActivity;
 
 import javax.inject.Singleton;
 

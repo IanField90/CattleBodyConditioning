@@ -1,4 +1,4 @@
-package com.ianfield.bodyscoring;
+package com.ianfield.bodyscoring.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.ianfield.bodyscoring.R;
 import com.ianfield.bodyscoring.managers.RecordManager;
 import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.widgets.ScoreAdapter;

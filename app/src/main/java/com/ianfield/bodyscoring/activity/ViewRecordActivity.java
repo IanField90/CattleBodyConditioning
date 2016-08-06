@@ -1,4 +1,4 @@
-package com.ianfield.bodyscoring;
+package com.ianfield.bodyscoring.activity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -32,6 +32,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.drive.Drive;
 import com.google.android.gms.drive.DriveApi;
 import com.google.android.gms.drive.MetadataChangeSet;
+import com.ianfield.bodyscoring.R;
 import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.models.Score;
 import com.ianfield.bodyscoring.utils.ScoreScale;
