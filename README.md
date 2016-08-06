@@ -9,7 +9,7 @@ An application for the analysis of heard body condition in dairy cattle for the 
 
 
 
-[![GooglePlay](http://ianfield.com/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.ianfield.bodyconditioning)
+[![GooglePlay](http://ianfield.com/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.ianfield.bodyscoring)
 
 Google Play and the Google Play logo are trademarks of Google Inc.
 
