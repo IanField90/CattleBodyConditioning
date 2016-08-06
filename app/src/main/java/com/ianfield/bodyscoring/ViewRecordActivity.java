@@ -77,7 +77,7 @@ public class ViewRecordActivity extends AppCompatActivity {
 
     private void setData() {
         Realm realm = Realm.getDefaultInstance();
-        Record record = realm.where(Record.class).findFirst();
+        Record record = realm.where(Record.class).equalTo("id", getIntent().getStringExtra(getString(R.string.extra_record_id))).findFirst();
 
         ArrayList<Entry> scores = new ArrayList<>();
         for (Score score : record.getScores()) {

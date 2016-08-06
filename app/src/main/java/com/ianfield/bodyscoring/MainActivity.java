@@ -1,11 +1,13 @@
 package com.ianfield.bodyscoring;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity
         recordAdapter = new RecordAdapter(RecordManager.getAllRecords(), new RecordAdapter.OnRecordActionListener() {
             @Override public void onView(String recordId, TextView name, TextView recordedDate, TextView dueDate) {
                 Intent intent = new Intent(MainActivity.this, ViewRecordActivity.class);
+                intent.putExtra(getString(R.string.extra_record_id), recordId);
                 intent.putExtra("name", name.getText().toString());
                 intent.putExtra("planned_calving_date", dueDate.getText().toString());
                 intent.putExtra("date", recordedDate.getText().toString());
@@ -76,11 +79,20 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
 
-            @Override public void onDelete(Record record, int position) {
-//                recordAdapter.getRecords().remove(record);
-                RecordManager.deleteRecord(record);
-                recordAdapter.notifyItemRemoved(position);
-                recordAdapter.notifyItemRangeChanged(position, recordAdapter.getRecords().size());
+            @Override public void onDelete(final Record record, final int position) {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle(R.string.delete)
+                        .setMessage(R.string.are_you_sure)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                RecordManager.deleteRecord(record);
+                                recordAdapter.notifyItemRemoved(position);
+                                recordAdapter.notifyItemRangeChanged(position, recordAdapter.getRecords().size());
+                            }
+                        })
+                        .setNegativeButton(R.string.no, null)
+                        .show();
             }
         });
         recyclerView.setAdapter(recordAdapter);

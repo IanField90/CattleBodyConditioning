@@ -16,10 +16,25 @@ import io.realm.RealmResults;
 public class RecordManager {
 
     public static Record createRecord(Record record) {
+        // TODO use user pref
+        double[] scoreScale = ScoreScale.UK_SCORE_SCALE;
+        if (record.getSetting() == null) {
+            record.setSetting(Setting.UK);
+        } else {
+            switch (record.getSetting()) {
+                case Setting.NZ:
+                    record.setSetting(Setting.NZ);
+                    scoreScale = ScoreScale.NZ_SCORE_SCALE;
+                    break;
+                case Setting.UK:
+                    record.setSetting(Setting.UK);
+                    scoreScale = ScoreScale.UK_SCORE_SCALE;
+                    break;
+            }
+        }
 
         ArrayList<Score> scores = new ArrayList<>();
 
-        double[] scoreScale = (record.getSetting() != null && record.getSetting().equals(Setting.NZ)) ? ScoreScale.NZ_SCORE_SCALE : ScoreScale.UK_SCORE_SCALE;
         for (double score : scoreScale) {
             scores.add(ScoreManager.createScore(score));
         }
