@@ -52,7 +52,7 @@ public class ScoringActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_scoring, menu);
+        inflater.inflate(R.menu.scoring, menu);
         return true;
     }
 

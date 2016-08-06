@@ -23,6 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:text="Planned: 05/08/2016"
         android:id="@+id/planned_calving"
@@ -33,6 +34,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:text="Scored: 05/08/2016"
         android:id="@+id/date"

@@ -35,7 +35,8 @@
             android:layout_height="wrap_content"
             android:text="@string/date"
             android:textStyle="bold"
-            />
+            android:textAppearance="?android:textAppearanceSmall"
+            android:layout_marginTop="10dp" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -50,6 +51,8 @@
             android:layout_height="wrap_content"
             android:text="@string/expected_date"
             android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textAppearance="?android:textAppearanceSmall"
             />
         <TextView
             android:layout_width="fill_parent"
