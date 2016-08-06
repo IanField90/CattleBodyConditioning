@@ -130,7 +130,7 @@ public class ViewRecordActivity extends AppCompatActivity {
         // if disabled, scaling can be done on x- and y-axis separately
         chart.setPinchZoom(false);
 
-        chart.setBackgroundColor(Color.TRANSPARENT);
+        chart.setBackgroundColor(getResources().getColor(R.color.graph_background));
 
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setEnabled(true);
