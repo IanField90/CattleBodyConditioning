@@ -1,13 +1,19 @@
 package com.ianfield.bodyscoring;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -32,10 +38,15 @@ import io.realm.Realm;
  * Created by Ian Field on 01/03/2016.
  */
 public class ViewRecordActivity extends AppCompatActivity {
+    private static final int REQUEST_WRITE_STORAGE = 112;
+
     @BindView(R.id.name) TextView name;
     @BindView(R.id.planned_calving) TextView plannedCalving;
     @BindView(R.id.date) TextView date;
     @BindView(R.id.chart) LineChart chart;
+    @BindView(R.id.root) LinearLayout root;
+
+    Record record;
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +72,18 @@ public class ViewRecordActivity extends AppCompatActivity {
     }
 
     private boolean checkPermissionsAndSave() {
-        // TODO actually check permissions
-        if (chart.saveToGallery("title" + System.currentTimeMillis(), 100)) {
-            Toast.makeText(getApplicationContext(), "Saving SUCCESSFUL!", Toast.LENGTH_SHORT).show();
+        boolean hasPermission = (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+        if (!hasPermission) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_WRITE_STORAGE);
         } else {
-            Toast.makeText(getApplicationContext(), "Saving FAILED!", Toast.LENGTH_SHORT).show();
+            if (chart.saveToGallery(record.getName() + System.currentTimeMillis(), 100)) {
+                Snackbar.make(root, R.string.save_success, Snackbar.LENGTH_SHORT).show();
+            } else {
+                Snackbar.make(root, R.string.save_failed, Snackbar.LENGTH_SHORT).show();
+            }
         }
         return true;
     }
@@ -77,7 +95,7 @@ public class ViewRecordActivity extends AppCompatActivity {
 
     private void setData() {
         Realm realm = Realm.getDefaultInstance();
-        Record record = realm.where(Record.class).equalTo("id", getIntent().getStringExtra(getString(R.string.extra_record_id))).findFirst();
+        record = realm.where(Record.class).equalTo("id", getIntent().getStringExtra(getString(R.string.extra_record_id))).findFirst();
 
         ArrayList<Entry> scores = new ArrayList<>();
         for (Score score : record.getScores()) {
@@ -160,5 +178,20 @@ public class ViewRecordActivity extends AppCompatActivity {
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.view, menu);
         return true;
+    }
+
+    @Override public void onRequestPermissionsResult(int requestCode,
+                                                     @NonNull String[] permissions,
+                                                     @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_WRITE_STORAGE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    checkPermissionsAndSave();
+                } else{
+                    Snackbar.make(root, R.string.permission_denied, Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 }

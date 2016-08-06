@@ -33,4 +33,7 @@
     <string name="are_you_sure">Are you sure you want to delete this record?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="permission_denied">The app was not allowed to write to your storage. Hence, it cannot function properly. Please consider granting it this permission</string>
+    <string name="save_failed">Save failed</string>
+    <string name="save_success">Save successful</string>
 </resources>
