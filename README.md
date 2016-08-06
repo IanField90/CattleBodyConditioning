@@ -5,7 +5,7 @@ Cattle Body Conditioning
 
 An application for the analysis of heard body condition in dairy cattle for the UK and NZ. Including multiple records.
 
-![App image](https://raw.githubusercontent.com/IanField90/CattleBodyConditioning/master/Nexus5x_framed.png)
+![App image](https://raw.githubusercontent.com/IanField90/CattleBodyConditioning/master/Nexus6_framed.png)
 
 
 
