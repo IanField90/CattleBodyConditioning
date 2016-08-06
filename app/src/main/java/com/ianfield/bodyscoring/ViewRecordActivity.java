@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
 import io.realm.Realm;
 
 /**
- * Created by ianfield on 01/03/2016.
+ * Created by Ian Field on 01/03/2016.
  */
 public class ViewRecordActivity extends AppCompatActivity {
     @BindView(R.id.name) TextView name;
@@ -86,7 +86,7 @@ public class ViewRecordActivity extends AppCompatActivity {
         }
 
         LineDataSet set = new LineDataSet(scores, "Data Set 1");
-        set.setCircleColorHole(Color.WHITE);//getResources().getColor(R.color.primary));
+        set.setCircleColorHole(Color.WHITE);
         set.setCircleColor(getResources().getColor(R.color.accent));
         set.setCircleRadius(7f);
         set.setCircleHoleRadius(3f);
@@ -119,7 +119,6 @@ public class ViewRecordActivity extends AppCompatActivity {
 
         // enable / disable grid background
         chart.setDrawGridBackground(false);
-//        chart.getRenderer().getGridPaint().setGridColor(Color.WHITE & 0x70FFFFFF);
 
         // enable touch gestures
         chart.setTouchEnabled(true);
@@ -133,12 +132,8 @@ public class ViewRecordActivity extends AppCompatActivity {
 
         chart.setBackgroundColor(Color.TRANSPARENT);
 
-        // set custom chart offsets (automatic offset calculation is hereby disabled)
-//        chart.setViewPortOffsets(10, 0, 10, 0);
-
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setEnabled(true);
-//        leftAxis.setAxisLineColor(Color.TRANSPARENT);
         leftAxis.setDrawZeroLine(false);
         leftAxis.setDrawGridLines(true);
         leftAxis.removeAllLimitLines();
@@ -146,7 +141,6 @@ public class ViewRecordActivity extends AppCompatActivity {
         leftAxis.setLabelCount(ScoreScale.UK_SCORE_SCALE.length, false);
         leftAxis.setDrawLabels(true);
         leftAxis.setAxisMinValue(0);
-//        leftAxis.setAxisMaxValue(100);
 
         chart.getAxisRight().setEnabled(false);
 
@@ -157,14 +151,10 @@ public class ViewRecordActivity extends AppCompatActivity {
         xAxis.setAxisMaxValue((float) ScoreScale.UK_SCORE_SCALE[ScoreScale.UK_SCORE_SCALE.length - 1] + 1);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        // add data
         chart.setData(data);
-        chart.animateX(100);
+//        chart.animateX(200);
 
-
-        // get the legend (only possible after setting data)
-//        Legend l = chart.getLegend();
-//        l.setEnabled(true);
+        // getting the legend is only possible after setting data
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
