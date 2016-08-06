@@ -28,4 +28,5 @@
     <string name="extra_record_id">record_id</string>
     <string name="save">Save</string>
     <string name="title_activity_view_record">View</string>
+    <string name="save_chart">Save Chart</string>
 </resources>

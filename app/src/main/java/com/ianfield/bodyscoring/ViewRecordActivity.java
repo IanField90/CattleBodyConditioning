@@ -4,8 +4,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -52,8 +54,20 @@ public class ViewRecordActivity extends AppCompatActivity {
             case android.R.id.home:
                 supportFinishAfterTransition();
                 return true;
+            case R.id.action_save_chart:
+                return checkPermissionsAndSave();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean checkPermissionsAndSave() {
+        // TODO actually check permissions
+        if (chart.saveToGallery("title" + System.currentTimeMillis(), 100)) {
+            Toast.makeText(getApplicationContext(), "Saving SUCCESSFUL!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Saving FAILED!", Toast.LENGTH_SHORT).show();
+        }
+        return true;
     }
 
     @Override public void onBackPressed() {
@@ -151,5 +165,10 @@ public class ViewRecordActivity extends AppCompatActivity {
         // get the legend (only possible after setting data)
 //        Legend l = chart.getLegend();
 //        l.setEnabled(true);
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.view, menu);
+        return true;
     }
 }
