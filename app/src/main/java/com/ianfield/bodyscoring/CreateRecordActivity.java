@@ -2,6 +2,7 @@ package com.ianfield.bodyscoring;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.ianfield.bodyscoring.managers.RecordManager;
 import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.utils.DateUtils;
+import com.ianfield.bodyscoring.utils.Setting;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.Calendar;
@@ -37,6 +39,14 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         setContentView(R.layout.activity_create_record);
         ButterKnife.bind(this);
         Date today = new Date();
+
+        @Setting.Country String setting = PreferenceManager
+                .getDefaultSharedPreferences(this)
+                .getString(
+                        getString(R.string.pref_Locality),
+                        getString(R.string.pref_localities_default)
+                );
+        record.setSetting(setting);
         record.setPlannedCalvingDate(today);
         record.setScoringDate(today);
         scoringDate.setText(DateUtils.dateToString(new Date()));
