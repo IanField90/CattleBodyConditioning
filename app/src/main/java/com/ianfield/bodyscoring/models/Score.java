@@ -1,5 +1,7 @@
 package com.ianfield.bodyscoring.models;
 
+import java.util.Locale;
+
 import io.realm.RealmObject;
 
 /**
@@ -25,5 +27,9 @@ public class Score extends RealmObject {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public String toString() {
+        return String.format(Locale.getDefault(), "Score: %.1f, Count: %d", score, count);
     }
 }

@@ -17,6 +17,6 @@ public class ScoreTest {
         Score score = new Score();
         score.setCount(1);
         score.setScore(4.5);
-        assertThat(score.toString()).isEqualTo("");
+        assertThat(score.toString()).isEqualTo("Score: 4.5, Count: 1");
     }
 }
