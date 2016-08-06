@@ -1,6 +1,5 @@
 package com.ianfield.bodyscoring;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -72,13 +71,10 @@ public class MainActivity extends AppCompatActivity {
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle(R.string.delete)
                         .setMessage(R.string.are_you_sure)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                RecordManager.deleteRecord(record);
-                                recordAdapter.notifyItemRemoved(position);
-                                recordAdapter.notifyItemRangeChanged(position, recordAdapter.getRecords().size());
-                            }
+                        .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                            RecordManager.deleteRecord(record);
+                            recordAdapter.notifyItemRemoved(position);
+                            recordAdapter.notifyItemRangeChanged(position, recordAdapter.getRecords().size());
                         })
                         .setNegativeButton(R.string.no, null)
                         .show();

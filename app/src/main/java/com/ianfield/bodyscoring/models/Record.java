@@ -26,7 +26,7 @@ public class Record extends RealmObject {
     Date plannedCalvingDate;
     Date scoringDate;
     String setting;
-    RealmList<Score> scores;// = new RealmList<>();
+    RealmList<Score> scores;
 
     public Record() {
         this.id = UUID.randomUUID().toString();
@@ -80,20 +80,4 @@ public class Record extends RealmObject {
     public RealmList<Score> getScores() {
         return scores;
     }
-
-//    public String toSummary() {
-//        switch (setting) {
-//            case UK:
-//                return String.format("1: %d, 2: %d, 2.5: %d, 3: %d, 4: %d, 5: %d",
-//                        ukOne, ukTwo, ukTwoFive, ukThree, ukFour, ukFive
-//                );
-//            case NZ:
-//            return String.format("<=2: %d, 2.5: %d, 3: %d, 3.5: %d, 4: %d, 4.5: %d, 5: %d," +
-//                        "5.5: %d, 6: %d, 6.5: %d, >=7: %d",
-//                        nzLessThanOrEqualTwo, nzTwoFive, nzThree, nzThreeFive, nzFour, nzFourFive,
-//                        nzFive, nzFiveFive, nzSix, nzSixFive, nzSevenOrMore
-//            );
-//        }
-//        return null;
-//    }
 }

@@ -3,7 +3,6 @@ package com.ianfield.bodyscoring.widgets;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -78,19 +77,11 @@ public class ScoreView extends LinearLayout {
         if (score.getCount() == 0) {
             subtractButton.setEnabled(false);
         }
-        addButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCount(ScoreView.this.score.getCount() + 1);
-            }
-        });
+        addButton.setOnClickListener(v -> setCount(ScoreView.this.score.getCount() + 1));
 
-        subtractButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ScoreView.this.score.getCount() > 0) {
-                    setCount(ScoreView.this.score.getCount() - 1);
-                }
+        subtractButton.setOnClickListener(v -> {
+            if (ScoreView.this.score.getCount() > 0) {
+                setCount(ScoreView.this.score.getCount() - 1);
             }
         });
     }

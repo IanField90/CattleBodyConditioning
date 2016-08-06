@@ -47,24 +47,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         holder.date.setText("Recorded: " + dateFormat.format(record.getScoringDate()));
         holder.plannedCalving.setText("Planned: " + dateFormat.format(record.getPlannedCalvingDate()));
         if (listener != null) {
-            holder.view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onView(record.getId(), holder.name, holder.date, holder.plannedCalving);
-                }
-            });
-            holder.edit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onEdit(record.getId());
-                }
-            });
-            holder.delete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onDelete(record, holder.getAdapterPosition());
-                }
-            });
+            holder.view.setOnClickListener(v -> listener.onView(record.getId(), holder.name, holder.date, holder.plannedCalving));
+            holder.edit.setOnClickListener(v -> listener.onEdit(record.getId()));
+            holder.delete.setOnClickListener(v -> listener.onDelete(record, holder.getAdapterPosition()));
         }
     }
 

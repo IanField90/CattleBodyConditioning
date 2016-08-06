@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -84,11 +83,8 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         } else {
             final Snackbar snackBar = Snackbar.make(findViewById(android.R.id.content), R.string.snackbar_missing_name, Snackbar.LENGTH_LONG);
 
-            snackBar.setAction(R.string.snackbar_dismiss, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    snackBar.dismiss();
-                }
+            snackBar.setAction(R.string.snackbar_dismiss, v -> {
+                snackBar.dismiss();
             });
             snackBar.show();
         }
