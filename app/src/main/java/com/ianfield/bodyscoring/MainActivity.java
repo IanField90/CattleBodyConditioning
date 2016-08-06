@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onEdit(String recordId) {
+                // TODO Go to create screen in edit mode instead
                 Intent intent = new Intent(MainActivity.this, ScoringActivity.class);
                 intent.putExtra(getString(R.string.extra_record_id), recordId);
                 startActivity(intent);
