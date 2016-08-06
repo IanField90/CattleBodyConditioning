@@ -45,6 +45,10 @@
             android:parentActivityName=".MainActivity"
             android:label="@string/title_activity_view_record"
             />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

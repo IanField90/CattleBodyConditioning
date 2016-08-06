@@ -10,7 +10,6 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
 import com.ianfield.bodyscoring.di.AppComponent;
-import com.ianfield.bodyscoring.di.AppModule;
 import com.ianfield.bodyscoring.di.DaggerAppComponent;
 
 import org.json.JSONException;
@@ -36,7 +35,6 @@ public class BaseApplication extends Application {
         Realm.setDefaultConfiguration(realmConfig);
 
         component = DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
                 .build();
 
         if (BuildConfig.DEBUG) {

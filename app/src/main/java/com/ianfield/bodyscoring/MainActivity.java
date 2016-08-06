@@ -2,19 +2,27 @@ package com.ianfield.bodyscoring;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.drive.Drive;
 import com.ianfield.bodyscoring.managers.RecordManager;
 import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.widgets.RecordAdapter;
@@ -25,12 +33,18 @@ import butterknife.OnClick;
 
 import static android.support.v4.app.ActivityOptionsCompat.makeSceneTransitionAnimation;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "MainActivity";
     @BindView(R.id.savedList) RecyclerView recyclerView;
 
     private RecordAdapter recordAdapter;
+    GoogleApiClient googleApiClient;
+    public static final int RESOLVE_CONNECTION_REQUEST_CODE = 1;
+    private static final int REQUEST_CODE_CREATOR = 2;
+    private static final int REQUEST_CODE_RESOLUTION = 3;
+
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
     @Override protected void onResume() {
         super.onResume();
         recordAdapter = new RecordAdapter(RecordManager.getAllRecords(), new RecordAdapter.OnRecordActionListener() {
-            @Override public void onView(String recordId, TextView name, TextView recordedDate, TextView dueDate) {
+            @Override
+            public void onView(String recordId, TextView name, TextView recordedDate, TextView dueDate) {
                 Intent intent = new Intent(MainActivity.this, ViewRecordActivity.class);
                 intent.putExtra(getString(R.string.extra_record_id), recordId);
                 intent.putExtra("name", name.getText().toString());
@@ -60,13 +75,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent, options.toBundle());
             }
 
-            @Override public void onEdit(String recordId) {
+            @Override
+            public void onEdit(String recordId) {
                 Intent intent = new Intent(MainActivity.this, ScoringActivity.class);
                 intent.putExtra(getString(R.string.extra_record_id), recordId);
                 startActivity(intent);
             }
 
-            @Override public void onDelete(final Record record, final int position) {
+            @Override
+            public void onDelete(final Record record, final int position) {
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle(R.string.delete)
                         .setMessage(R.string.are_you_sure)
@@ -83,6 +100,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(recordAdapter);
+        if (googleApiClient == null) {
+            // Create the API client and bind it to an instance variable.
+            // We use this instance as the callback for connection and connection
+            // failures.
+            // Since no account name is passed, the user is prompted to choose.
+            googleApiClient = new GoogleApiClient.Builder(this)
+                    .addApi(Drive.API)
+                    .addScope(Drive.SCOPE_FILE)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .build();
+        }
+        //        googleApiClient.connect();
     }
 
     @OnClick(R.id.fabNew) public void fabNewClick() {
@@ -108,5 +138,53 @@ public class MainActivity extends AppCompatActivity {
     public void actionSettingsClicked() {
         // Open settings screen to toggle mode (scoring resolution/values)
         startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+    @Override protected void onPause() {
+        if (googleApiClient != null && googleApiClient.isConnected()) {
+            googleApiClient.disconnect();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        // save the file
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.d(TAG, "onConnectionSuspended: ");
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        // Called whenever the API client fails to connect.
+        Log.i(TAG, "GoogleApiClient connection failed: " + connectionResult.toString());
+        if (!connectionResult.hasResolution()) {
+            // show the localized error dialog.
+            GoogleApiAvailability.getInstance().getErrorDialog(this, connectionResult.getErrorCode(), 0).show();
+            return;
+        }
+        // The failure has a resolution. Resolve it.
+        // Called typically when the app is not yet authorized, and an authorization
+        // dialog is displayed to the user.
+        try {
+            connectionResult.startResolutionForResult(this, REQUEST_CODE_RESOLUTION);
+        } catch (IntentSender.SendIntentException e) {
+            Log.e(TAG, "Exception while starting resolution activity", e);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+//        switch (requestCode) {
+//            case RESOLVE_CONNECTION_REQUEST_CODE:
+//                if (resultCode == RESULT_OK) {
+//                    googleApiClient.connect();
+//                }
+//                break;
+//        }
     }
 }
