@@ -1,0 +1,6 @@
+{
+  "name": "Cattlebodyconditioning",
+  "tagline": "Application to speed up and visualise Body Condition Scoring for Cattle",
+  "body": "Cattle Body Conditioning\r\n===\r\n\r\n![Icon](https://raw.githubusercontent.com/IanField90/CattleBodyConditioning/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)\r\n\r\nAn application for the analysis of heard body condition in dairy cattle for the UK and NZ. Including multiple records.\r\n\r\n![App image](https://raw.githubusercontent.com/IanField90/CattleBodyConditioning/master/Nexus6_framed.png)\r\n\r\n\r\n\r\n[![GooglePlay](http://ianfield.com/assets/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.ianfield.bodyscoring)\r\n\r\nGoogle Play and the Google Play logo are trademarks of Google Inc.\r\n\r\n# Planned features\r\n- Visualization of individual results in graph including:\r\n  - Score percentage (bar chart)\r\n  - 95th percentile and confidence interval outliers (phase 2)\r\n- Visualization of overall result throughout the year\r\n- Google Drive integration to upload records to the cloud\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
