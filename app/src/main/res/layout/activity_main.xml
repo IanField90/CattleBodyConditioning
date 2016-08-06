@@ -4,9 +4,18 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:background="#ccc"
     tools:context=".MainActivity"
     >
+    <!--android:background="#ccc"-->
+
+    <TextView
+        android:id="@+id/createRecordPrompt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/create_record_prompt"
+        android:textAppearance="?android:textAppearanceLarge"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

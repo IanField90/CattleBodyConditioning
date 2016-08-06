@@ -37,9 +37,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        tools:text="Scored: 05/08/2016"
+        tools:text="05/08/2016"
         android:id="@+id/date"
-        android:gravity="center_horizontal"
+        android:gravity="end"
         android:transitionName="date"
         />
 

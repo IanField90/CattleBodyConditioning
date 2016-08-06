@@ -43,7 +43,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 tools:text="05/08/2016"
                 android:id="@+id/date"
-                android:gravity="right"
+                android:gravity="end"
                 />
         </LinearLayout>
 

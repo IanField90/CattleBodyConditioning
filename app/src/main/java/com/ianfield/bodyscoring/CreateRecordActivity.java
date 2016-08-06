@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -52,8 +54,9 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         record.setSetting(setting);
         record.setPlannedCalvingDate(today);
         record.setScoringDate(today);
-        scoringDate.setText(DateUtils.dateToString(new Date()));
-        expectedCalvingDate.setText(DateUtils.dateToString(new Date()));
+
+        setTextViewUnderlined(scoringDate, DateUtils.dateToString(new Date()));
+        setTextViewUnderlined(expectedCalvingDate, DateUtils.dateToString(new Date()));
     }
 
     Calendar todaysDatePickerCaldendar = Calendar.getInstance();
@@ -114,10 +117,16 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
 
         if (view == todaysDatePickerDialog) {
             record.setScoringDate(date.getTime());
-            scoringDate.setText(DateUtils.dateToString(date.getTime()));
+            setTextViewUnderlined(scoringDate, DateUtils.dateToString(date.getTime()));
         } else {
             record.setPlannedCalvingDate(date.getTime());
-            expectedCalvingDate.setText(DateUtils.dateToString(date.getTime()));
+            setTextViewUnderlined(expectedCalvingDate, DateUtils.dateToString(date.getTime()));
         }
+    }
+
+    private void setTextViewUnderlined(TextView textView, String string) {
+        SpannableString content = new SpannableString(string);
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        textView.setText(content);
     }
 }

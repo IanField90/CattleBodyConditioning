@@ -1,4 +1,4 @@
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".CreateRecordActivity"
@@ -13,6 +13,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_alignParentTop="true"
         >
 
         <android.support.design.widget.TextInputLayout
@@ -64,15 +65,15 @@
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@color/accent"
             />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/next"
-            android:id="@+id/next"
-            />
-
     </LinearLayout>
-</ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:text="@string/create"
+        android:id="@+id/next"
+        />
+</RelativeLayout>

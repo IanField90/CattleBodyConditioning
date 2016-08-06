@@ -30,6 +30,7 @@
             android:name=".CreateRecordActivity"
             android:label="@string/title_activity_create_record"
             android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity"
             />
 
         <activity
