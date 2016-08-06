@@ -7,7 +7,8 @@ package com.ianfield.bodyscoring;
 public class BodyConditioningApplication extends BaseApplication {
     private static final String TAG = "BodyConditioningApplication";
 
-    @Override public void onCreate() {
+    @Override
+    public void onCreate() {
         super.onCreate();
         component().inject(this);
     }

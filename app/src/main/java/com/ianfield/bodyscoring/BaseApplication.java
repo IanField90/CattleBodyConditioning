@@ -27,7 +27,9 @@ public class BaseApplication extends Application {
 
     private AppComponent component;
 
-    @CallSuper @Override public void onCreate() {
+    @CallSuper
+    @Override
+    public void onCreate() {
         super.onCreate();
 
         RealmConfiguration realmConfig = new RealmConfiguration.Builder(this)
@@ -40,7 +42,8 @@ public class BaseApplication extends Application {
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this);
             registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-                @Override public void onActivityCreated(Activity activity, Bundle bundle) {
+                @Override
+                public void onActivityCreated(Activity activity, Bundle bundle) {
                     Log.d(TAG, activity.getLocalClassName() + " created. Intent extras: " + getJSONFromBundle(activity.getIntent().getExtras()));
                 }
 

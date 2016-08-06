@@ -26,11 +26,13 @@ import static android.support.v4.app.ActivityOptionsCompat.makeSceneTransitionAn
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    @BindView(R.id.savedList) RecyclerView recyclerView;
+    @BindView(R.id.savedList)
+    RecyclerView recyclerView;
 
     private RecordAdapter recordAdapter;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -40,9 +42,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
     }
 
-    @Override protected void onResume() {
+    @Override
+    protected void onResume() {
         super.onResume();
         recordAdapter = new RecordAdapter(RecordManager.getAllRecords(), new RecordAdapter.OnRecordActionListener() {
+            @SuppressWarnings("unchecked")
             @Override
             public void onView(String recordId, TextView name, TextView recordedDate, TextView dueDate) {
                 Intent intent = new Intent(MainActivity.this, ViewRecordActivity.class);
@@ -84,11 +88,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.fabNew) public void fabNewClick() {
+    @OnClick(R.id.fabNew)
+    public void fabNewClick() {
         startActivity(new Intent(this, CreateRecordActivity.class));
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;

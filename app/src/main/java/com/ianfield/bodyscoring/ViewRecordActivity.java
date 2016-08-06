@@ -53,11 +53,20 @@ public class ViewRecordActivity extends AppCompatActivity
     private static final String TAG = "ViewRecordActivity";
     private static final int REQUEST_WRITE_STORAGE = 112;
 
-    @BindView(R.id.name) TextView name;
-    @BindView(R.id.planned_calving) TextView plannedCalving;
-    @BindView(R.id.date) TextView date;
-    @BindView(R.id.chart) LineChart chart;
-    @BindView(R.id.root) LinearLayout root;
+    @BindView(R.id.name)
+    TextView name;
+
+    @BindView(R.id.planned_calving)
+    TextView plannedCalving;
+
+    @BindView(R.id.date)
+    TextView date;
+
+    @BindView(R.id.chart)
+    LineChart chart;
+
+    @BindView(R.id.root)
+    LinearLayout root;
 
     GoogleApiClient googleApiClient;
     public static final int RESOLVE_CONNECTION_REQUEST_CODE = 1;
@@ -66,7 +75,8 @@ public class ViewRecordActivity extends AppCompatActivity
 
     Record record;
 
-    @Override public void onCreate(Bundle savedInstanceState) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_record);
         ButterKnife.bind(this);
@@ -90,7 +100,8 @@ public class ViewRecordActivity extends AppCompatActivity
         }
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
@@ -122,7 +133,8 @@ public class ViewRecordActivity extends AppCompatActivity
         return true;
     }
 
-    @Override public void onBackPressed() {
+    @Override
+    public void onBackPressed() {
         supportFinishAfterTransition();
         super.onBackPressed();
     }
@@ -204,14 +216,14 @@ public class ViewRecordActivity extends AppCompatActivity
         // getting the legend is only possible after setting data
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.view, menu);
         return true;
     }
 
-    @Override public void onRequestPermissionsResult(int requestCode,
-                                                     @NonNull String[] permissions,
-                                                     @NonNull int[] grantResults) {
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case REQUEST_WRITE_STORAGE: {

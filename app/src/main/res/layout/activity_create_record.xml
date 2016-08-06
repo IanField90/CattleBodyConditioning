@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/scoringDate"
             tools:text="01/01/2016"
-            android:textColor="@android:color/primary_text_light"
+            android:textAppearance="?android:textAppearanceLarge"
             />
 
         <TextView
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/expectedCalvingDate"
             tools:text="01/01/2016"
-            android:textColor="@android:color/primary_text_light"
+            android:textAppearance="?android:textAppearanceLarge"
             />
 
         <Button

@@ -44,8 +44,10 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Record record = records.get(position);
         holder.name.setText(record.getName());
-        holder.date.setText("Recorded: " + dateFormat.format(record.getScoringDate()));
-        holder.plannedCalving.setText("Planned: " + dateFormat.format(record.getPlannedCalvingDate()));
+        holder.date.setText(holder.date.getContext().getString(R.string.recorded_label,
+                        dateFormat.format(record.getScoringDate())));
+        holder.plannedCalving.setText(holder.plannedCalving.getContext().getString(R.string.planned_calving_label,
+                dateFormat.format(record.getPlannedCalvingDate())));
         if (listener != null) {
             holder.view.setOnClickListener(v -> listener.onView(record.getId(), holder.name, holder.date, holder.plannedCalving));
             holder.edit.setOnClickListener(v -> listener.onEdit(record.getId()));
@@ -60,12 +62,24 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CardView cardView;
-        @BindView(R.id.name) public TextView name;
-        @BindView(R.id.view) public Button view;
-        @BindView(R.id.edit) public Button edit;
-        @BindView(R.id.delete) public Button delete;
-        @BindView(R.id.date) public TextView date;
-        @BindView(R.id.planned_calving) public TextView plannedCalving;
+        @BindView(R.id.name)
+        public TextView name;
+
+        @BindView(R.id.view)
+        public Button view;
+
+        @BindView(R.id.edit)
+        public Button edit;
+
+        @BindView(R.id.delete)
+        public Button delete;
+
+        @BindView(R.id.date)
+        public TextView date;
+
+        @BindView(R.id.planned_calving)
+        public TextView plannedCalving;
+
         public ViewHolder(View container) {
             super(container);
             cardView = (CardView) container;
