@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,12 +18,12 @@ import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -36,6 +35,7 @@ import com.ianfield.bodyscoring.R;
 import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.models.Score;
 import com.ianfield.bodyscoring.utils.ScoreScale;
+import com.ianfield.bodyscoring.utils.Setting;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -64,7 +64,7 @@ public class ViewRecordActivity extends AppCompatActivity
     TextView date;
 
     @BindView(R.id.chart)
-    LineChart chart;
+    BarChart chart;
 
     @BindView(R.id.root)
     LinearLayout root;
@@ -143,35 +143,41 @@ public class ViewRecordActivity extends AppCompatActivity
     private void setData() {
         Realm realm = Realm.getDefaultInstance();
         record = realm.where(Record.class).equalTo("id", getIntent().getStringExtra(getString(R.string.extra_record_id))).findFirst();
+        final double[] scoreScale = record.getSetting().equals(Setting.NZ) ? ScoreScale.NZ_SCORE_SCALE : ScoreScale.UK_SCORE_SCALE;
 
-        ArrayList<Entry> scores = new ArrayList<>();
+        ArrayList<BarEntry> scores = new ArrayList<>();
+        int count = 0;
         for (Score score : record.getScores()) {
-            Entry entry = new Entry((float) score.getScore(), score.getCount());
+            count += score.getCount();
+            BarEntry entry = new BarEntry((float) score.getScore(), score.getCount());
             scores.add(entry);
         }
 
-        LineDataSet set = new LineDataSet(scores, "Data Set 1");
-        set.setCircleColorHole(Color.WHITE);
-        set.setCircleColor(getResources().getColor(R.color.accent));
-        set.setCircleRadius(7f);
-        set.setCircleHoleRadius(3f);
-        set.setDrawCircleHole(true);
-        set.setDrawValues(true);
-        set.setColor(getResources().getColor(R.color.primary));
-        set.setLineWidth(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
-        set.setValueFormatter((value, entry, dataSetIndex, viewPortHandler) -> String.format(Locale.getDefault(), "%d", (int)value));
-        set.setValueTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 5, getResources().getDisplayMetrics()));
-        set.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+        final int countTotal = count;
+        BarDataSet set = new BarDataSet(scores, "Data Set 1");
+
+        set.setColor(getResources().getColor(R.color.accent));
+        set.setBarBorderWidth(1f);
+        set.setBarBorderColor(getResources().getColor(R.color.primary));
+        set.setValueFormatter((value, entry, dataSetIndex, viewPortHandler) -> {
+            if (value > 0) {
+                return String.format(Locale.getDefault(), "%.0f%%", (value / (float) countTotal) * 100f);
+            } else {
+                return "";
+            }
+        });
+        set.setValueTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 3, getResources().getDisplayMetrics()));
+
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-        LineData data = new LineData(set);
+        BarData data = new BarData(set);
         data.setDrawValues(true);
+        data.setBarWidth(0.4f);
 
 
-        setupChart(data);
+        setupChart(data, scoreScale);
     }
 
-    private void setupChart(LineData data) {
+    private void setupChart(BarData data, double[] scoreScale) {
         chart.setAutoScaleMinMaxEnabled(true);
         // no description text
         chart.setDescription("");
@@ -191,6 +197,7 @@ public class ViewRecordActivity extends AppCompatActivity
         chart.setPinchZoom(false);
 
         chart.setBackgroundColor(getResources().getColor(R.color.graph_background));
+        chart.setDrawValueAboveBar(true);
 
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setEnabled(true);
@@ -198,7 +205,7 @@ public class ViewRecordActivity extends AppCompatActivity
         leftAxis.setDrawGridLines(true);
         leftAxis.removeAllLimitLines();
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-        leftAxis.setLabelCount(ScoreScale.UK_SCORE_SCALE.length, false);
+        leftAxis.setLabelCount(scoreScale.length, false);
         leftAxis.setDrawLabels(true);
         leftAxis.setAxisMinValue(0);
 
@@ -207,9 +214,10 @@ public class ViewRecordActivity extends AppCompatActivity
         XAxis xAxis = chart.getXAxis();
         xAxis.setEnabled(true);
         xAxis.setDrawGridLines(true);
-        xAxis.setAxisMinValue(0);
-        xAxis.setAxisMaxValue((float) ScoreScale.UK_SCORE_SCALE[ScoreScale.UK_SCORE_SCALE.length - 1] + 1);
+        xAxis.setAxisMinValue((float) scoreScale[0]);
+        xAxis.setAxisMaxValue((float) scoreScale[scoreScale.length - 1] + 1);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setGranularity(0.5f);
 
         chart.setData(data);
 //        chart.animateX(200);

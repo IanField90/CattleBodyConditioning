@@ -6,12 +6,10 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ianfield.bodyscoring.R;
-import com.ianfield.bodyscoring.activity.ScoringActivity;
 import com.ianfield.bodyscoring.managers.RecordManager;
 import com.ianfield.bodyscoring.models.Record;
 import com.ianfield.bodyscoring.utils.DateUtils;
@@ -128,7 +126,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
 
     private void setTextViewUnderlined(TextView textView, String string) {
         SpannableString content = new SpannableString(string);
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+//        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         textView.setText(content);
     }
 }

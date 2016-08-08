@@ -18,7 +18,8 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <EditText
                 android:layout_width="match_parent"
@@ -27,6 +28,7 @@
                 android:id="@+id/name"
                 android:imeOptions="actionDone"
                 android:maxLines="1"
+                android:textAppearance="?android:textAppearanceLarge"
                 android:inputType="textCapWords" />
 
         </android.support.design.widget.TextInputLayout>
@@ -36,34 +38,44 @@
             android:layout_height="wrap_content"
             android:text="@string/date"
             android:textStyle="bold"
-            android:textAppearance="?android:textAppearanceSmall"
-            android:layout_marginTop="10dp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/scoringDate"
-            tools:text="01/01/2016"
-            android:textColor="@color/accent"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:drawablePadding="5dp"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             />
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scoringDate"
+            android:padding="15dp"
+            tools:text="01/01/2016"
+            android:textColor="@color/button_text_colour"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:drawablePadding="5dp"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/expected_date"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:textAppearance="?android:textAppearanceSmall"
+            android:layout_marginBottom="10dp"
+            android:textAppearance="?android:textAppearanceMedium"
             />
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/expectedCalvingDate"
             tools:text="01/01/2016"
+            android:padding="15dp"
             android:textAppearance="?android:textAppearanceLarge"
-            android:textColor="@color/accent"
+            android:textColor="@color/button_text_colour"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+
             />
     </LinearLayout>
 
