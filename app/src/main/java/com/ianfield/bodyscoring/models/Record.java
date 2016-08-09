@@ -88,16 +88,16 @@ public class Record extends RealmObject {
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String csv = String.format("%s\n", name);
         csv += ("Recorded on," + df.format(scoringDate) + "\n");
-        csv += ("Planned start of calving," + df.format(plannedCalvingDate) + "\n");
+        csv += ("Planned start of calving," + df.format(plannedCalvingDate) + "\n\n");
 
-        String scoreHeadings = "";
-        String scoreValues = "";
-        for (Score score : scores.sort("score", Sort.ASCENDING)) {
+        String scoreHeadings = "Score,";
+        String scoreValues = "Count,";
+        for (Score score : getScores().sort("score", Sort.ASCENDING)) {
             scoreHeadings += String.format(Locale.getDefault(), "%.1f,", score.getScore());
-            scoreHeadings += score.getCount() + ",";
+            scoreValues += score.getCount() + ",";
         }
-        scoreHeadings = scoreHeadings.substring(0, scoreHeadings.length() - 2);
-        scoreValues = scoreValues.substring(0, scoreValues.length() - 2);
+        scoreHeadings = scoreHeadings.substring(0, scoreHeadings.length() - 1);
+        scoreValues = scoreValues.substring(0, scoreValues.length() - 1);
         scoreHeadings += "\n";
         scoreValues += "\n";
         csv += scoreHeadings;

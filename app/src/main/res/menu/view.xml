@@ -9,11 +9,10 @@
         app:showAsAction="ifRoom"
         />
 
-    <!-- TODO show if room when CSV export is complete -->
     <item android:id="@+id/action_upload"
         android:title="@string/save_to_drive"
         android:icon="@drawable/google_drive"
-        android:visible="false"
+        android:visible="true"
         app:showAsAction="ifRoom"
         />
 </menu>

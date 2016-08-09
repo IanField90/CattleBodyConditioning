@@ -37,7 +37,7 @@
     <string name="save_failed">Save failed</string>
     <string name="save_success">Save successful</string>
     <string name="save_to_drive">Save to Drive</string>
-    <string name="error_drive_upload">\"Error while trying to create new file contents\"</string>
+    <string name="error_drive_upload">Error while trying to create new file contents</string>
     <string name="recorded_label">%1$s</string>
     <string name="planned_calving_label">Planned Calving: %1$s</string>
     <string name="create_record_prompt">Please add a new record!</string>

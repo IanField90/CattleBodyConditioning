@@ -266,14 +266,15 @@ public class ViewRecordActivity extends AppCompatActivity
         Log.i(TAG, "GoogleApiClient connection failed: " + connectionResult.toString());
         if (!connectionResult.hasResolution()) {
             // show the localized error dialog.
-            GoogleApiAvailability.getInstance().getErrorDialog(this, connectionResult.getErrorCode(), 0).show();
+            GoogleApiAvailability.getInstance().getErrorDialog(ViewRecordActivity.this, connectionResult.getErrorCode(), 0).show();
             return;
         }
         // The failure has a resolution. Resolve it.
         // Called typically when the app is not yet authorized, and an authorization
         // dialog is displayed to the user.
         try {
-            connectionResult.startResolutionForResult(this, REQUEST_CODE_RESOLUTION);
+            Log.d(TAG, "onConnectionFailed: " + "attempting resolution");
+            connectionResult.startResolutionForResult(ViewRecordActivity.this, RESOLVE_CONNECTION_REQUEST_CODE);
         } catch (IntentSender.SendIntentException e) {
             Log.e(TAG, "Exception while starting resolution activity", e);
         }
@@ -311,7 +312,7 @@ public class ViewRecordActivity extends AppCompatActivity
                     // Create the initial metadata - MIME type and title.
                     // Note that the user will be able to change the title later.
                     MetadataChangeSet metadataChangeSet = new MetadataChangeSet.Builder()
-                            .setMimeType("text/plain")
+                            .setMimeType("text/csv")
                             .setTitle(record.getName() + System.currentTimeMillis() +  ".csv")
                             .build();
                     // Create an intent for the file chooser, and start it.
