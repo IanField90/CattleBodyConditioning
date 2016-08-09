@@ -4,11 +4,14 @@ import android.text.TextUtils;
 
 import com.ianfield.bodyscoring.utils.Setting;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.Sort;
 import io.realm.annotations.PrimaryKey;
 
 /**
@@ -79,5 +82,26 @@ public class Record extends RealmObject {
 
     public RealmList<Score> getScores() {
         return scores;
+    }
+
+    public String toCSV() {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String csv = String.format("%s\n", name);
+        csv += ("Recorded on," + df.format(scoringDate) + "\n");
+        csv += ("Planned start of calving," + df.format(plannedCalvingDate) + "\n");
+
+        String scoreHeadings = "";
+        String scoreValues = "";
+        for (Score score : scores.sort("score", Sort.ASCENDING)) {
+            scoreHeadings += String.format(Locale.getDefault(), "%.1f,", score.getScore());
+            scoreHeadings += score.getCount() + ",";
+        }
+        scoreHeadings = scoreHeadings.substring(0, scoreHeadings.length() - 2);
+        scoreValues = scoreValues.substring(0, scoreValues.length() - 2);
+        scoreHeadings += "\n";
+        scoreValues += "\n";
+        csv += scoreHeadings;
+        csv += scoreValues;
+        return csv;
     }
 }

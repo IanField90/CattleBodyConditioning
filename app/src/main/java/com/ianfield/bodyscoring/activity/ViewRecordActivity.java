@@ -304,7 +304,7 @@ public class ViewRecordActivity extends AppCompatActivity
                     // Get an output stream for the contents.
                     OutputStream outputStream = result.getDriveContents().getOutputStream();
                     try {
-                        outputStream.write(record.toString().getBytes());
+                        outputStream.write(record.toCSV().getBytes());
                     } catch (IOException e) {
                         Log.e(TAG, "Unable to write file contents.", e);
                     }
@@ -312,7 +312,7 @@ public class ViewRecordActivity extends AppCompatActivity
                     // Note that the user will be able to change the title later.
                     MetadataChangeSet metadataChangeSet = new MetadataChangeSet.Builder()
                             .setMimeType("text/plain")
-                            .setTitle(record.getName() + System.currentTimeMillis() +  ".txt")
+                            .setTitle(record.getName() + System.currentTimeMillis() +  ".csv")
                             .build();
                     // Create an intent for the file chooser, and start it.
                     IntentSender intentSender = Drive.DriveApi
