@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        tools:text="Planned: 05/08/2016"
+        tools:text="@string/planned_calving_label"
         android:id="@+id/planned_calving"
-        android:gravity="center_horizontal"
+        android:gravity="start"
         android:transitionName="planned_calving_date"
         />
 
@@ -37,7 +37,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        tools:text="05/08/2016"
+        tools:text="@string/recorded_label"
         android:id="@+id/date"
         android:gravity="end"
         android:transitionName="date"

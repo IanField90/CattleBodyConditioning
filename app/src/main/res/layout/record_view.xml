@@ -23,29 +23,32 @@
             android:id="@+id/name"
             />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="10dp"
+            android:layout_gravity="end"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                tools:text="Planned Calving: 05/08/2016"
+                tools:text="@string/planned_calving_label"
                 android:id="@+id/planned_calving"
+                android:layout_alignParentStart="true"
                 />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                tools:text="05/08/2016"
+                tools:text="@string/recorded_label"
                 android:id="@+id/date"
                 android:gravity="end"
+                android:layout_alignParentEnd="true"
                 />
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
