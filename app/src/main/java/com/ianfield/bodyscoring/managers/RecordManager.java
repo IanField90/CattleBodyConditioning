@@ -46,6 +46,10 @@ public class RecordManager {
         return record;
     }
 
+    public static Record updateRecord(Record record) {
+        return Realm.getDefaultInstance().copyToRealmOrUpdate(record);
+    }
+
     public static Record getRecordById(String id) {
         return Realm.getDefaultInstance()
                 .where(Record.class)

@@ -42,4 +42,5 @@
     <string name="planned_calving_label">Planned Calving: %1$s</string>
     <string name="create_record_prompt">Please add a new record!</string>
     <string name="about">About</string>
+    <string name="next_continue">Continue</string>
 </resources>

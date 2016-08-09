@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableString;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -22,6 +22,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 
 public class CreateRecordActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     public static final String PLANNED_CALVING_DATE_PICKER = "planned_calving_date_picker";
@@ -36,12 +37,40 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     @BindView(R.id.name)
     EditText name;
 
+    @BindView(R.id.next)
+    Button next;
+
     Record record = new Record();
+
+    private boolean existing = false;
+
+    Calendar todaysDatePickerCalendar = Calendar.getInstance();
+
+    DatePickerDialog todaysDatePickerDialog = DatePickerDialog.newInstance(
+            this,
+            todaysDatePickerCalendar.get(Calendar.YEAR),
+            todaysDatePickerCalendar.get(Calendar.MONTH),
+            todaysDatePickerCalendar.get(Calendar.DAY_OF_MONTH)
+    );
+
+    Calendar expectedDatePickerCalendar = Calendar.getInstance();
+    DatePickerDialog expectedDatePickerDialog = DatePickerDialog.newInstance(
+            this,
+            expectedDatePickerCalendar.get(Calendar.YEAR),
+            expectedDatePickerCalendar.get(Calendar.MONTH),
+            expectedDatePickerCalendar.get(Calendar.DAY_OF_MONTH)
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_record);
+        String id = getIntent().getStringExtra("record_id");
+        if (id != null) {
+            record = Realm.getDefaultInstance().where(Record.class).equalTo("id", id).findFirst();
+            existing = true;
+        }
+
         ButterKnife.bind(this);
         Date today = new Date();
 
@@ -51,29 +80,39 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
                         getString(R.string.pref_Locality),
                         getString(R.string.pref_localities_default)
                 );
-        record.setSetting(setting);
-        record.setPlannedCalvingDate(today);
-        record.setScoringDate(today);
+        if (!existing) {
+            record.setSetting(setting);
+            record.setPlannedCalvingDate(today);
+            record.setScoringDate(today);
+            scoringDate.setText(DateUtils.dateToString(new Date()));
+            expectedCalvingDate.setText(DateUtils.dateToString(new Date()));
+        } else {
+            name.setText(record.getName());
+            scoringDate.setText(DateUtils.dateToString(record.getScoringDate()));
+            expectedCalvingDate.setText(DateUtils.dateToString(record.getPlannedCalvingDate()));
 
-        setTextViewUnderlined(scoringDate, DateUtils.dateToString(new Date()));
-        setTextViewUnderlined(expectedCalvingDate, DateUtils.dateToString(new Date()));
+            todaysDatePickerCalendar.setTime(record.getScoringDate());
+            todaysDatePickerDialog = DatePickerDialog.newInstance(
+                    this,
+                    todaysDatePickerCalendar.get(Calendar.YEAR),
+                    todaysDatePickerCalendar.get(Calendar.MONTH),
+                    todaysDatePickerCalendar.get(Calendar.DAY_OF_MONTH)
+            );
+
+            expectedDatePickerCalendar.setTime(record.getPlannedCalvingDate());
+            expectedDatePickerDialog = DatePickerDialog.newInstance(
+                    this,
+                    expectedDatePickerCalendar.get(Calendar.YEAR),
+                    expectedDatePickerCalendar.get(Calendar.MONTH),
+                    expectedDatePickerCalendar.get(Calendar.DAY_OF_MONTH)
+            );
+
+            next.setText(R.string.next_continue);
+        }
+
     }
 
-    Calendar todaysDatePickerCaldendar = Calendar.getInstance();
-    DatePickerDialog todaysDatePickerDialog = DatePickerDialog.newInstance(
-            this,
-            todaysDatePickerCaldendar.get(Calendar.YEAR),
-            todaysDatePickerCaldendar.get(Calendar.MONTH),
-            todaysDatePickerCaldendar.get(Calendar.DAY_OF_MONTH)
-    );
 
-    Calendar expectedDatePickerCaldendar = Calendar.getInstance();
-    DatePickerDialog expectedDatePickerDialog = DatePickerDialog.newInstance(
-            this,
-            expectedDatePickerCaldendar.get(Calendar.YEAR),
-            expectedDatePickerCaldendar.get(Calendar.MONTH),
-            expectedDatePickerCaldendar.get(Calendar.DAY_OF_MONTH)
-    );
 
     @OnClick(R.id.scoringDate)
     public void clickSetDate() {
@@ -87,7 +126,13 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
 
     @OnClick(R.id.next)
     public void clickNext() {
+        if (existing) {
+            Realm.getDefaultInstance().beginTransaction();
+        }
         record.setName(name.getText().toString());
+        if (existing) {
+            Realm.getDefaultInstance().commitTransaction();
+        }
         if (record.isValidRecord()) {
             saveRecordAndLaunchScoring();
         } else {
@@ -101,7 +146,9 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     }
 
     private void saveRecordAndLaunchScoring() {
-        record = RecordManager.createRecord(record);
+        if (!existing) {
+            record = RecordManager.createRecord(record);
+        }
         Intent intent = new Intent(this, ScoringActivity.class);
         intent.putExtra(getString(R.string.extra_record_id), record.getId());
         startActivity(intent);
@@ -116,17 +163,17 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         date.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         if (view == todaysDatePickerDialog) {
+            if (existing) {
+                Realm.getDefaultInstance().beginTransaction();
+            }
             record.setScoringDate(date.getTime());
-            setTextViewUnderlined(scoringDate, DateUtils.dateToString(date.getTime()));
+            if (existing) {
+                Realm.getDefaultInstance().commitTransaction();
+            }
+            scoringDate.setText(DateUtils.dateToString(date.getTime()));
         } else {
             record.setPlannedCalvingDate(date.getTime());
-            setTextViewUnderlined(expectedCalvingDate, DateUtils.dateToString(date.getTime()));
+            expectedCalvingDate.setText(DateUtils.dateToString(date.getTime()));
         }
-    }
-
-    private void setTextViewUnderlined(TextView textView, String string) {
-        SpannableString content = new SpannableString(string);
-//        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        textView.setText(content);
     }
 }
