@@ -69,6 +69,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         if (id != null) {
             record = Realm.getDefaultInstance().where(Record.class).equalTo("id", id).findFirst();
             existing = true;
+            setTitle(R.string.edit_record);
         }
 
         ButterKnife.bind(this);
@@ -88,6 +89,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
             expectedCalvingDate.setText(DateUtils.dateToString(new Date()));
         } else {
             name.setText(record.getName());
+            name.setSelection(record.getName().length());
             scoringDate.setText(DateUtils.dateToString(record.getScoringDate()));
             expectedCalvingDate.setText(DateUtils.dateToString(record.getPlannedCalvingDate()));
 
