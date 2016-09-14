@@ -60,7 +60,9 @@ public class BaseApplication extends Application {
                 @Override public void onActivityDestroyed(Activity activity) { }
             });
         } else {
-            Fabric.with(this, new Crashlytics());
+            if (BuildConfig.USE_CRASHLYTICS) {
+                Fabric.with(this, new Crashlytics());
+            }
         }
     }
 
