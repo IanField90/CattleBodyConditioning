@@ -1,5 +1,6 @@
 Cattle Body Conditioning
 ===
+[![Build Status](https://travis-ci.org/IanField90/CattleBodyConditioning.png)](https://travis-ci.org/IanField90/CattleBodyConditioning)
 
 ![Icon](https://raw.githubusercontent.com/IanField90/CattleBodyConditioning/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
