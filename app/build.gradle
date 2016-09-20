@@ -5,15 +5,6 @@ apply plugin: 'realm-android'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.getkeepsafe.dexcount'
 
-
-repositories {
-    jcenter()
-    mavenLocal()
-    maven { url "https://jitpack.io" }
-    maven { url "https://clojars.org/repo/" }
-    maven { url 'https://maven.fabric.io/public' }
-}
-
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
