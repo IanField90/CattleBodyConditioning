@@ -9,10 +9,10 @@
         app:showAsAction="ifRoom"
         />
 
-    <item android:id="@+id/action_upload"
-        android:title="@string/save_to_drive"
-        android:icon="@drawable/google_drive"
-        android:visible="true"
-        app:showAsAction="ifRoom"
-        />
+    <!--<item android:id="@+id/action_upload"-->
+        <!--android:title="@string/save_to_drive"-->
+        <!--android:icon="@drawable/google_drive"-->
+        <!--android:visible="true"-->
+        <!--app:showAsAction="ifRoom"-->
+        <!--/>-->
 </menu>
