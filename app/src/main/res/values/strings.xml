@@ -29,7 +29,7 @@
     <string name="save">Save</string>
     <string name="title_activity_view_record">View</string>
     <string name="save_chart">Save Chart</string>
-    <string name="delete">Delete Record</string>
+    <string name="delete">Delete</string>
     <string name="are_you_sure">Are you sure you want to delete this record?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -44,4 +44,6 @@
     <string name="about">About</string>
     <string name="next_continue">Continue</string>
     <string name="edit_record">Edit Record</string>
+    <string name="edit">Edit</string>
+    <string name="view">View</string>
 </resources>

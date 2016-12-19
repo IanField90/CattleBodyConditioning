@@ -15,8 +15,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:transitionName="name"
         android:id="@+id/name"/>
 

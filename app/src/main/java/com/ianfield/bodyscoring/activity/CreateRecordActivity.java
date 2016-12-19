@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ianfield.bodyscoring.R;
@@ -35,7 +35,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     TextView expectedCalvingDate;
 
     @BindView(R.id.name)
-    EditText name;
+    TextInputEditText name;
 
     @BindView(R.id.next)
     Button next;
