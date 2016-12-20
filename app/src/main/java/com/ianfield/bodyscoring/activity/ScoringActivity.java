@@ -2,6 +2,7 @@ package com.ianfield.bodyscoring.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import com.ianfield.bodyscoring.R;
 import com.ianfield.bodyscoring.managers.RecordManager;
 import com.ianfield.bodyscoring.models.Record;
+import com.ianfield.bodyscoring.widgets.DividerColorItemDecoration;
 import com.ianfield.bodyscoring.widgets.ScoreAdapter;
 
 import butterknife.BindView;
@@ -38,6 +40,7 @@ public class ScoringActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         ScoreAdapter adapter = new ScoreAdapter(record.getScores());
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerColorItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         Log.d(TAG, "onCreate: " + adapter.getItemCount());
     }

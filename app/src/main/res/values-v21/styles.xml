@@ -12,6 +12,9 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="android:textColorPrimary">@color/abc_primary_text_material_dark</item>
 
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+
     </style>
 
 </resources>

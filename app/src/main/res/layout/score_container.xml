@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/cardView"
-                                    android:layout_marginBottom="10dp"
-    >
-
-    <com.ianfield.bodyscoring.widgets.ScoreView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:id="@+id/scoreView"
-
-        />
-</android.support.v7.widget.CardView>
+<com.ianfield.bodyscoring.widgets.ScoreView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scoreView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    />

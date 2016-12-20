@@ -1,34 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:weightSum="6"
+    >
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="2.5"
-        android:layout_marginEnd="10dp"
-        android:minWidth="50dp"
-        android:textStyle="bold"
-        android:gravity="end"
         android:id="@+id/score"
-        />
-    <Button
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/subtract"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="2.5"
+        />
+
+    <Button
         android:id="@+id/subtract_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/subtract"
+        android:textColor="@android:color/primary_text_light"
         />
+
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add"
         android:id="@+id/add_button"
-        />
-    <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:minWidth="50dp"
-        android:text="@string/zero"
-        android:id="@+id/count_text"
+        android:layout_weight="1"
+        android:text="@string/add"
+        android:textColor="@android:color/primary_text_light"
         />
-</merge>
+
+    <TextView
+        android:id="@+id/count_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="@string/zero"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+</LinearLayout>

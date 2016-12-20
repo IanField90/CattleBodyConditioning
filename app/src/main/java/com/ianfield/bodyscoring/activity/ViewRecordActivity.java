@@ -168,7 +168,6 @@ public class ViewRecordActivity extends AppCompatActivity {
     private void setupChart(BarData data, double[] scoreScale) {
         // TODO refactor for butterknife
         float offset = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 8f, getResources().getDisplayMetrics());
-        float axisFontSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12f, getResources().getDisplayMetrics());
 
         chart.setAutoScaleMinMaxEnabled(true);
         // no description text
@@ -198,7 +197,7 @@ public class ViewRecordActivity extends AppCompatActivity {
         yAxis.setLabelCount(scoreScale.length, false);
         yAxis.setDrawLabels(true);
         yAxis.setAxisMinimum(0);
-        yAxis.setTextSize(axisFontSize);
+        yAxis.setTextSize(12f);
 
         chart.getAxisRight().setEnabled(false);
 
@@ -208,7 +207,7 @@ public class ViewRecordActivity extends AppCompatActivity {
         xAxis.setGranularity(0.5f);
         xAxis.setAxisMinimum((float) scoreScale[0] - .5f);
         xAxis.setAxisMaximum((float) scoreScale[scoreScale.length - 1] + .5f);
-        xAxis.setTextSize(axisFontSize);
+        xAxis.setTextSize(12f);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
         chart.setData(data);

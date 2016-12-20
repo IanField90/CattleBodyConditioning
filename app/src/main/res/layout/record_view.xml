@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/cardView"
     android:layout_margin="8dp"
+    android:orientation="vertical"
     app:contentPaddingTop="16dp"
     >
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,42 +24,44 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:transitionName="name"
-            tools:text="Name"
-            android:id="@+id/name"
-            />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="end"
-            >
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/name"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                tools:text="@string/planned_calving_label"
-                android:id="@+id/planned_calving"
-                android:layout_gravity="start"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:transitionName="name"
+                tools:text="Name"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                tools:text="@string/recorded_label"
-                android:id="@+id/date"
-                android:gravity="end"
                 android:layout_gravity="end"
-                />
-        </FrameLayout>
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/planned_calving"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    tools:text="@string/planned_calving_label"
+                    />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    tools:text="@string/recorded_label"
+                    />
+            </FrameLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -66,31 +70,32 @@
             android:orientation="horizontal"
             android:weightSum="3"
             >
+
             <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/view"
-                android:layout_weight="1"
                 android:id="@+id/view"
                 style="?buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/view"
                 />
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/edit"
-                android:layout_weight="1"
                 android:id="@+id/edit"
                 style="?buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/edit"
                 />
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/delete"
-                android:layout_weight="1"
                 android:id="@+id/delete"
                 style="?buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/delete"
                 />
 
         </LinearLayout>

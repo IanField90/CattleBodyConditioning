@@ -9,7 +9,7 @@
     <string name="expected_date">Planned calving date</string>
     <string name="set_expected_date">Set expected date</string>
     <string name="create">Create</string>
-    <string name="title_activity_scoring">Score</string>
+    <string name="title_activity_scoring">Scores</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="done">Done</string>
@@ -46,4 +46,6 @@
     <string name="edit_record">Edit Record</string>
     <string name="edit">Edit</string>
     <string name="view">View</string>
+    <string name="score">Score</string>
+    <string name="count">Count</string>
 </resources>

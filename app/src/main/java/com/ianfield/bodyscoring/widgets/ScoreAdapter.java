@@ -1,6 +1,5 @@
 package com.ianfield.bodyscoring.widgets;
 
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +39,8 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.cardView)
-        public CardView cardView;
+//        @BindView(R.id.cardView)
+//        public CardView cardView;
 
         @BindView(R.id.scoreView)
         public ScoreView scoreView;

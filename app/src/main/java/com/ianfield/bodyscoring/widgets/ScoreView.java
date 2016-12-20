@@ -19,17 +19,10 @@ import io.realm.Realm;
  */
 public class ScoreView extends LinearLayout {
 
-    @BindView(R.id.subtract_button)
-    Button subtractButton;
-
-    @BindView(R.id.add_button)
-    Button addButton;
-
-    @BindView(R.id.count_text)
-    TextView countText;
-
-    @BindView(R.id.score)
-    TextView scoreText;
+    @BindView(R.id.subtract_button) Button subtractButton;
+    @BindView(R.id.add_button) Button addButton;
+    @BindView(R.id.count_text) TextView countText;
+    @BindView(R.id.score) TextView scoreText;
 
     private Score score;
 
