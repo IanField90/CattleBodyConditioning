@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -27,9 +26,11 @@ import com.ianfield.bodyscoring.models.Score;
 import com.ianfield.bodyscoring.utils.ScoreScale;
 import com.ianfield.bodyscoring.utils.Setting;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
@@ -42,20 +43,14 @@ public class ViewRecordActivity extends AppCompatActivity {
     private static final String TAG = "ViewRecordActivity";
     private static final int REQUEST_WRITE_STORAGE = 112;
 
-    @BindView(R.id.name)
-    TextView name;
-
-    @BindView(R.id.planned_calving)
-    TextView plannedCalving;
-
-    @BindView(R.id.date)
-    TextView date;
-
-    @BindView(R.id.chart)
-    BarChart chart;
-
-    @BindView(R.id.root)
-    LinearLayout root;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    @BindView(R.id.name) TextView name;
+    @BindView(R.id.planned_calving) TextView plannedCalving;
+    @BindView(R.id.date) TextView date;
+    @BindView(R.id.chart) BarChart chart;
+    @BindView(R.id.root) LinearLayout root;
+    @BindDimen(R.dimen.chart_offset) int chartOffset;
+    @BindDimen(R.dimen.chart_value_text_size) int chartValueTextSize;
 
 //    GoogleApiClient googleApiClient;
     public static final int RESOLVE_CONNECTION_REQUEST_CODE = 1;
@@ -69,10 +64,6 @@ public class ViewRecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_record);
         ButterKnife.bind(this);
-        name.setText(getIntent().getStringExtra("name"));
-        plannedCalving.setText(getIntent().getStringExtra("planned_calving_date"));
-        date.setText(getIntent().getStringExtra("date"));
-
         setData();
 
 //        if (googleApiClient == null) {
@@ -131,6 +122,11 @@ public class ViewRecordActivity extends AppCompatActivity {
     private void setData() {
         Realm realm = Realm.getDefaultInstance();
         record = realm.where(Record.class).equalTo("id", getIntent().getStringExtra(getString(R.string.extra_record_id))).findFirst();
+
+        name.setText(record.getName());
+        date.setText(getString(R.string.recorded_label, dateFormat.format(record.getScoringDate())));
+        plannedCalving.setText(getString(R.string.planned_calving_label, dateFormat.format(record.getPlannedCalvingDate())));
+
         final double[] scoreScale = record.getSetting().equals(Setting.NZ) ? ScoreScale.NZ_SCORE_SCALE : ScoreScale.UK_SCORE_SCALE;
 
         ArrayList<BarEntry> scores = new ArrayList<>();
@@ -154,7 +150,7 @@ public class ViewRecordActivity extends AppCompatActivity {
                 return "";
             }
         });
-        set.setValueTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 5, getResources().getDisplayMetrics()));
+        set.setValueTextSize(chartValueTextSize);
 
         set.setAxisDependency(YAxis.AxisDependency.LEFT);
         BarData data = new BarData(set);
@@ -166,22 +162,18 @@ public class ViewRecordActivity extends AppCompatActivity {
     }
 
     private void setupChart(BarData data, double[] scoreScale) {
-        // TODO refactor for butterknife
-        float offset = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 8f, getResources().getDisplayMetrics());
-
         chart.setAutoScaleMinMaxEnabled(true);
         // no description text
         Description description = new Description();
         description.setText("");
         chart.getLegend().setEnabled(false);
-        chart.setExtraOffsets(offset, offset, offset, offset);
+        chart.setExtraOffsets(chartOffset, chartOffset, chartOffset, chartOffset);
         chart.setDescription(description);
         chart.setDrawGridBackground(false);
         chart.setTouchEnabled(true);
         chart.setDragEnabled(true);
         chart.setScaleEnabled(true);
 
-        // if disabled, scaling can be done on x- and y-axis separately
         chart.setPinchZoom(false);
 
         chart.setBackgroundColor(getResources().getColor(R.color.graph_background));
@@ -211,9 +203,6 @@ public class ViewRecordActivity extends AppCompatActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
         chart.setData(data);
-//        chart.animateX(200);
-
-        // getting the legend is only possible after setting data
     }
 
     @Override

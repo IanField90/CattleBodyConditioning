@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
             public void onView(String recordId, TextView name, TextView recordedDate, TextView dueDate) {
                 Intent intent = new Intent(MainActivity.this, ViewRecordActivity.class);
                 intent.putExtra(getString(R.string.extra_record_id), recordId);
-                intent.putExtra("name", name.getText().toString());
-                intent.putExtra("planned_calving_date", dueDate.getText().toString());
-                intent.putExtra("date", recordedDate.getText().toString());
                 ActivityOptionsCompat options = makeSceneTransitionAnimation(
                         MainActivity.this,
                         Pair.create((View) name, "name"),

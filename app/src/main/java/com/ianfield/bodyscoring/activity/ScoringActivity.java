@@ -1,5 +1,6 @@
 package com.ianfield.bodyscoring.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -72,6 +73,10 @@ public class ScoringActivity extends AppCompatActivity {
     }
 
     private void done() {
+        Intent intent = new Intent(this, ViewRecordActivity.class);
+        intent.putExtra(getString(R.string.extra_record_id), record.getId());
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
         finish();
     }
 }
