@@ -18,8 +18,8 @@ android {
         applicationId "com.ianfield.bodyscoring"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 6
-        versionName "1.2.0"
+        versionCode 7
+        versionName "1.2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -67,9 +67,9 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0'
 
     // Crashlytics
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-        transitive = true;
-    }
+    // compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
+    //     transitive = true;
+    // }
 
     compile 'io.reactivex:rxjava:1.1.10'
     compile 'io.reactivex:rxandroid:1.2.1'

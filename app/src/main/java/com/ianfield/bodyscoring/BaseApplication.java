@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
+// import com.crashlytics.android.Crashlytics;
 import com.facebook.stetho.Stetho;
 import com.ianfield.bodyscoring.di.AppComponent;
 import com.ianfield.bodyscoring.di.DaggerAppComponent;
@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 import java.util.Set;
 
-import io.fabric.sdk.android.Fabric;
+// import io.fabric.sdk.android.Fabric;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -59,10 +59,10 @@ public class BaseApplication extends Application {
 
                 @Override public void onActivityDestroyed(Activity activity) { }
             });
-        } else {
-            if (BuildConfig.USE_CRASHLYTICS) {
-                Fabric.with(this, new Crashlytics());
-            }
+//        } else {
+            // if (BuildConfig.USE_CRASHLYTICS) {
+            //     Fabric.with(this, new Crashlytics());
+            // }
         }
     }
 
