@@ -11,14 +11,14 @@
     <string name="create">Create</string>
     <string name="title_activity_scoring">Scores</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="done">Done</string>
     <string name="snack_missing_setting">Please make sure to enter all values.</string>
     <string name="snackbar_missing_name">Please enter a name</string>
     <string name="snackbar_dismiss">Dismiss</string>
     <string name="title_activity_maps">Map</string>
-    <string name="pref_Locality">Locality</string>
+    <string name="pref_locality">Locality</string>
     <string name="pref_localities_default">NZ</string>
+    <string name="pref_score_scale">Scoring</string>
     <string name="settings">Settings</string>
     <string name="add">+</string>
     <string name="subtract">-</string>

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference
-        android:key="pref_locality"
-        android:title="@string/pref_Locality"
-        android:dialogTitle="@string/pref_Locality"
-        android:entries="@array/pref_localities_entries"
-        android:entryValues="@array/pref_localities_values"
-        android:defaultValue="@string/pref_localities_default"
-        />
+
+    <PreferenceCategory
+        android:title="@string/pref_score_scale"
+        >
+        <ListPreference
+            android:key="@string/pref_locality"
+            android:title="@string/pref_locality"
+            android:dialogTitle="@string/pref_locality"
+            android:entries="@array/pref_localities_entries"
+            android:entryValues="@array/pref_localities_values"
+            android:defaultValue="@string/pref_localities_default"
+            android:summary="@string/pref_localities_default"
+            />
+    </PreferenceCategory>
 </PreferenceScreen>

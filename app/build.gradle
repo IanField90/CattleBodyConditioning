@@ -18,8 +18,8 @@ android {
         applicationId "com.ianfield.bodyscoring"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 7
-        versionName "1.2.1"
+        versionCode 9
+        versionName "1.2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {

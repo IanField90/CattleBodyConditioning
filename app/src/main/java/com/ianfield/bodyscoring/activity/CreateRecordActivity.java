@@ -78,7 +78,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         @Setting.Country String setting = PreferenceManager
                 .getDefaultSharedPreferences(this)
                 .getString(
-                        getString(R.string.pref_Locality),
+                        getString(R.string.pref_locality),
                         getString(R.string.pref_localities_default)
                 );
         if (!existing) {
