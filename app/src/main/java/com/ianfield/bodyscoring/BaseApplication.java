@@ -59,17 +59,10 @@ public class BaseApplication extends Application {
 
                 @Override public void onActivityDestroyed(Activity activity) { }
             });
-//        } else {
-            // if (BuildConfig.USE_CRASHLYTICS) {
-            //     Fabric.with(this, new Crashlytics());
-            // }
         }
     }
 
     public static String getJSONFromBundle(Bundle bundle) {
-        if (bundle == null || Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-            return null;
-        }
         JSONObject json = new JSONObject();
         Set<String> keys = bundle.keySet();
         for (String key : keys) {
