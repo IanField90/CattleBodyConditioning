@@ -16,7 +16,7 @@ import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Ian Field on 09/01/2016.
- *
+ * <p>
  * Store the scoring numbers for a herd, UK scale and NZ scale
  * 1. Drying off ( 7–8 weeks pre-calving)
  * 2. Pre-calving ( 3 weeks pre-calving)
@@ -64,7 +64,9 @@ public class Record extends RealmObject {
     }
 
 
-    public @Setting.Country String getSetting() {
+    public
+    @Setting.Country
+    String getSetting() {
         return setting;
     }
 
@@ -76,12 +78,12 @@ public class Record extends RealmObject {
         return (plannedCalvingDate != null && scoringDate != null && !TextUtils.isEmpty(name));
     }
 
-    public void setScores(RealmList<Score> scores) {
-        this.scores = scores;
-    }
-
     public RealmList<Score> getScores() {
         return scores;
+    }
+
+    public void setScores(RealmList<Score> scores) {
+        this.scores = scores;
     }
 
     public String toCSV() {

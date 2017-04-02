@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.ScoringActivity">
 
-    <item android:id="@+id/action_done"
+    <item
+        android:id="@+id/action_done"
         android:title="@string/done"
-        app:showAsAction="always"
-        />
+        app:showAsAction="always" />
 </menu>

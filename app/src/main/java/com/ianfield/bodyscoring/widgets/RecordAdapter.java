@@ -25,6 +25,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     RealmResults<Record> records;
     OnRecordActionListener listener;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
     public RecordAdapter(@Nullable RealmResults<Record> records, @Nullable OnRecordActionListener listener) {
         this.records = records;
         this.listener = listener;
@@ -45,7 +46,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         final Record record = records.get(position);
         holder.name.setText(record.getName());
         holder.date.setText(holder.date.getContext().getString(R.string.recorded_label,
-                        dateFormat.format(record.getScoringDate())));
+                dateFormat.format(record.getScoringDate())));
         holder.plannedCalving.setText(holder.plannedCalving.getContext().getString(R.string.planned_calving_label,
                 dateFormat.format(record.getPlannedCalvingDate())));
         if (listener != null) {
@@ -58,6 +59,14 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return records == null ? 0 : records.size();
+    }
+
+    public interface OnRecordActionListener {
+        void onView(String id, TextView name, TextView date, TextView plannedCalving);
+
+        void onEdit(String id);
+
+        void onDelete(Record record, int position);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -85,13 +94,5 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
             cardView = (CardView) container;
             ButterKnife.bind(this, container);
         }
-    }
-
-    public interface OnRecordActionListener {
-        void onView(String id, TextView name, TextView date, TextView plannedCalving);
-
-        void onEdit(String id);
-
-        void onDelete(Record record, int position);
     }
 }

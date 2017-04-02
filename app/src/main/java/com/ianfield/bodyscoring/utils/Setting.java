@@ -8,9 +8,11 @@ import android.support.annotation.StringDef;
 public class Setting {
     public static final String UK = "UK";
     public static final String NZ = "NZ";
+
     @StringDef({
             UK,
             NZ,
     })
-    public @interface Country {}
+    public @interface Country {
+    }
 }

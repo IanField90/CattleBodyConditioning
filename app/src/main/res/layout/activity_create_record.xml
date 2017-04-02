@@ -1,5 +1,4 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,14 +12,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name"
-            >
+            android:hint="@string/name">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/name"
@@ -29,7 +26,7 @@
                 android:imeOptions="actionDone"
                 android:inputType="textCapWords"
                 android:maxLines="1"
-                android:textColor="@color/grey_900"/>
+                android:textColor="@color/grey_900" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -40,8 +37,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/date"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/scoringDate"
@@ -52,8 +48,7 @@
             android:padding="8dp"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="@color/button_text_colour"
-            tools:text="01/01/2016"
-            />
+            tools:text="01/01/2016" />
 
         <TextView
             android:layout_width="match_parent"
@@ -62,8 +57,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/expected_date"
             android:textAppearance="?android:textAppearanceMedium"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/expectedCalvingDate"
@@ -88,6 +82,5 @@
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/accent"
         android:text="@string/create"
-        android:textColor="@color/grey_800"
-        />
+        android:textColor="@color/grey_800" />
 </RelativeLayout>

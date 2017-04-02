@@ -39,24 +39,28 @@ import io.realm.Realm;
  * Created by Ian Field on 01/03/2016.
  */
 public class ViewRecordActivity extends AppCompatActivity {
-//        implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+    //    GoogleApiClient googleApiClient;
+    public static final int RESOLVE_CONNECTION_REQUEST_CODE = 1;
+    //        implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = "ViewRecordActivity";
     private static final int REQUEST_WRITE_STORAGE = 112;
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-    @BindView(R.id.name) TextView name;
-    @BindView(R.id.planned_calving) TextView plannedCalving;
-    @BindView(R.id.date) TextView date;
-    @BindView(R.id.chart) BarChart chart;
-    @BindView(R.id.root) LinearLayout root;
-    @BindDimen(R.dimen.chart_offset) int chartOffset;
-    @BindDimen(R.dimen.chart_value_text_size) int chartValueTextSize;
-
-//    GoogleApiClient googleApiClient;
-    public static final int RESOLVE_CONNECTION_REQUEST_CODE = 1;
     private static final int REQUEST_CODE_CREATOR = 2;
     private static final int REQUEST_CODE_RESOLUTION = 3;
-
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    @BindView(R.id.name)
+    TextView name;
+    @BindView(R.id.planned_calving)
+    TextView plannedCalving;
+    @BindView(R.id.date)
+    TextView date;
+    @BindView(R.id.chart)
+    BarChart chart;
+    @BindView(R.id.root)
+    LinearLayout root;
+    @BindDimen(R.dimen.chart_offset)
+    int chartOffset;
+    @BindDimen(R.dimen.chart_value_text_size)
+    int chartValueTextSize;
     Record record;
 
     @Override
@@ -218,7 +222,7 @@ public class ViewRecordActivity extends AppCompatActivity {
             case REQUEST_WRITE_STORAGE: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     checkPermissionsAndSave();
-                } else{
+                } else {
                     Snackbar.make(root, R.string.permission_denied, Snackbar.LENGTH_SHORT).show();
                 }
             }

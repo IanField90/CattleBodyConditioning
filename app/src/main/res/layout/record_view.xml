@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
@@ -8,22 +7,19 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    app:contentPaddingTop="16dp"
-    >
+    app:contentPaddingTop="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            >
+            android:paddingRight="16dp">
 
             <TextView
                 android:id="@+id/name"
@@ -32,16 +28,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:transitionName="name"
-                tools:text="Name"
-                />
+                tools:text="Name" />
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/planned_calving"
@@ -49,8 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    tools:text="@string/planned_calving_label"
-                    />
+                    tools:text="@string/planned_calving_label" />
 
                 <TextView
                     android:id="@+id/date"
@@ -59,8 +52,7 @@
                     android:layout_gravity="end"
                     android:gravity="end"
                     android:textAppearance="?android:attr/textAppearanceSmall"
-                    tools:text="@string/recorded_label"
-                    />
+                    tools:text="@string/recorded_label" />
             </FrameLayout>
         </LinearLayout>
 
@@ -68,8 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3"
-            >
+            android:weightSum="3">
 
             <Button
                 android:id="@+id/view"
@@ -77,8 +68,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/view"
-                />
+                android:text="@string/view" />
 
             <Button
                 android:id="@+id/edit"
@@ -86,8 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/edit"
-                />
+                android:text="@string/edit" />
 
             <Button
                 android:id="@+id/delete"
@@ -95,8 +84,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/delete"
-                />
+                android:text="@string/delete" />
 
         </LinearLayout>
     </LinearLayout>

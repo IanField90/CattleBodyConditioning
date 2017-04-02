@@ -41,18 +41,13 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     Button next;
 
     Record record = new Record();
-
-    private boolean existing = false;
-
     Calendar todaysDatePickerCalendar = Calendar.getInstance();
-
     DatePickerDialog todaysDatePickerDialog = DatePickerDialog.newInstance(
             this,
             todaysDatePickerCalendar.get(Calendar.YEAR),
             todaysDatePickerCalendar.get(Calendar.MONTH),
             todaysDatePickerCalendar.get(Calendar.DAY_OF_MONTH)
     );
-
     Calendar expectedDatePickerCalendar = Calendar.getInstance();
     DatePickerDialog expectedDatePickerDialog = DatePickerDialog.newInstance(
             this,
@@ -60,6 +55,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
             expectedDatePickerCalendar.get(Calendar.MONTH),
             expectedDatePickerCalendar.get(Calendar.DAY_OF_MONTH)
     );
+    private boolean existing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +111,6 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     }
 
 
-
     @OnClick(R.id.scoringDate)
     public void clickSetDate() {
         todaysDatePickerDialog.show(getFragmentManager(), SCORING_DATE_PICKER);
@@ -158,7 +153,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     }
 
     @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth)  {
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
         Calendar date = Calendar.getInstance();
         date.set(Calendar.YEAR, year);
         date.set(Calendar.MONTH, monthOfYear);

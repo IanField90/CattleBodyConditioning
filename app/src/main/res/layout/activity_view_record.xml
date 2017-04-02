@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/root"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingEnd="@dimen/activity_horizontal_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingStart="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
     <TextView
         android:id="@+id/name"
@@ -19,7 +19,7 @@
         android:text="Large Text"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:transitionName="name"/>
+        android:transitionName="name" />
 
     <TextView
         android:id="@+id/planned_calving"
@@ -29,8 +29,7 @@
         android:gravity="start"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:transitionName="planned_calving_date"
-        tools:text="@string/planned_calving_label"
-        />
+        tools:text="@string/planned_calving_label" />
 
     <TextView
         android:id="@+id/date"
@@ -41,13 +40,11 @@
         android:gravity="end"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:transitionName="date"
-        tools:text="@string/recorded_label"
-        />
+        tools:text="@string/recorded_label" />
 
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 </LinearLayout>

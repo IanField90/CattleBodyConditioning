@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.ViewRecordActivity">
 
-    <item android:id="@+id/action_save_chart"
-        android:title="@string/save_chart"
+    <item
+        android:id="@+id/action_save_chart"
         android:icon="@drawable/download"
-        app:showAsAction="ifRoom"
-        />
+        android:title="@string/save_chart"
+        app:showAsAction="ifRoom" />
 
     <!--<item android:id="@+id/action_upload"-->
-        <!--android:title="@string/save_to_drive"-->
-        <!--android:icon="@drawable/google_drive"-->
-        <!--android:visible="true"-->
-        <!--app:showAsAction="ifRoom"-->
-        <!--/>-->
+    <!--android:title="@string/save_to_drive"-->
+    <!--android:icon="@drawable/google_drive"-->
+    <!--android:visible="true"-->
+    <!--app:showAsAction="ifRoom"-->
+    <!--/>-->
 </menu>

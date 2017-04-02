@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(getString(R.string.extra_record_id), recordId);
                 ActivityOptionsCompat options = makeSceneTransitionAnimation(
                         MainActivity.this,
-                        Pair.create((View) name, "name"),
-                        Pair.create((View) recordedDate, "date"),
-                        Pair.create((View) dueDate, "planned_calving_date")
+                        Pair.create(name, "name"),
+                        Pair.create(recordedDate, "date"),
+                        Pair.create(dueDate, "planned_calving_date")
                 );
                 startActivity(intent, options.toBundle());
             }

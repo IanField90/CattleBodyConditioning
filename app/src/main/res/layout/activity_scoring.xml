@@ -1,9 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,8 +12,7 @@
         android:orientation="horizontal"
         android:paddingBottom="4dp"
         android:paddingTop="4dp"
-        android:weightSum="6"
-        >
+        android:weightSum="6">
 
         <TextView
             android:layout_width="0dp"
@@ -23,13 +21,12 @@
             android:gravity="center"
             android:text="@string/score"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="2"/>
+            android:layout_weight="2" />
 
         <TextView
             android:layout_width="0dp"
@@ -38,8 +35,7 @@
             android:gravity="center"
             android:text="@string/count"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -49,8 +45,7 @@
         android:layout_height="match_parent"
         android:paddingTop="8dp"
         tools:context=".activity.ScoringActivity"
-        tools:listitem="@layout/score_view"
-        />
+        tools:listitem="@layout/score_view" />
 
 
 </LinearLayout>
