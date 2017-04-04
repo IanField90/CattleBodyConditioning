@@ -26,7 +26,7 @@ public class ScoringActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    Record record;
+    private Record record;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

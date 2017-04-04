@@ -22,9 +22,9 @@ import io.realm.RealmResults;
  * Created by Ian Field on 1/20/16.
  */
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
-    RealmResults<Record> records;
-    OnRecordActionListener listener;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private final RealmResults<Record> records;
+    private final OnRecordActionListener listener;
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     public RecordAdapter(@Nullable RealmResults<Record> records, @Nullable OnRecordActionListener listener) {
         this.records = records;
@@ -70,7 +70,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public CardView cardView;
+        public final CardView cardView;
         @BindView(R.id.name)
         public TextView name;
 

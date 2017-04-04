@@ -24,12 +24,12 @@ import io.realm.annotations.PrimaryKey;
  */
 public class Record extends RealmObject {
     @PrimaryKey
-    String id;
-    String name;
-    Date plannedCalvingDate;
-    Date scoringDate;
-    String setting;
-    RealmList<Score> scores;
+    private String id;
+    private String name;
+    private Date plannedCalvingDate;
+    private Date scoringDate;
+    private String setting;
+    private RealmList<Score> scores;
 
     public Record() {
         this.id = UUID.randomUUID().toString();

@@ -9,9 +9,9 @@ import io.realm.RealmObject;
  */
 public class Score extends RealmObject {
 
-    double score;
+    private double score;
 
-    int count = 0;
+    private int count = 0;
 
     public double getScore() {
         return score;

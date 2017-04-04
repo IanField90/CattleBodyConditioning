@@ -46,7 +46,7 @@ public class ViewRecordActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_STORAGE = 112;
     private static final int REQUEST_CODE_CREATOR = 2;
     private static final int REQUEST_CODE_RESOLUTION = 3;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
     @BindView(R.id.name)
     TextView name;
     @BindView(R.id.planned_calving)
@@ -61,7 +61,7 @@ public class ViewRecordActivity extends AppCompatActivity {
     int chartOffset;
     @BindDimen(R.dimen.chart_value_text_size)
     int chartValueTextSize;
-    Record record;
+    private Record record;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

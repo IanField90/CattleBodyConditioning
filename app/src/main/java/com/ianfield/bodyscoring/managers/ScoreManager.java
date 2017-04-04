@@ -7,7 +7,7 @@ import io.realm.Realm;
 /**
  * Created by Ian Field on 14/01/2016.
  */
-public class ScoreManager {
+class ScoreManager {
 
     private static final String TAG = "ScoreManager";
 

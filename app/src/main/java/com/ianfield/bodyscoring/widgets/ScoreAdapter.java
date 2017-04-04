@@ -16,7 +16,7 @@ import io.realm.RealmList;
  * Created by Ian Field on 1/20/16.
  */
 public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> {
-    private RealmList<Score> dataset;
+    private final RealmList<Score> dataset;
 
     public ScoreAdapter(RealmList<Score> dataset) {
         this.dataset = dataset;

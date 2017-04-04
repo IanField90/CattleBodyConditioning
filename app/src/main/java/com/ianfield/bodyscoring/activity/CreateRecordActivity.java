@@ -25,8 +25,8 @@ import butterknife.OnClick;
 import io.realm.Realm;
 
 public class CreateRecordActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    public static final String PLANNED_CALVING_DATE_PICKER = "planned_calving_date_picker";
-    public static final String SCORING_DATE_PICKER = "scoring_date_picker";
+    private static final String PLANNED_CALVING_DATE_PICKER = "planned_calving_date_picker";
+    private static final String SCORING_DATE_PICKER = "scoring_date_picker";
 
     @BindView(R.id.scoringDate)
     TextView scoringDate;
@@ -40,16 +40,16 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
     @BindView(R.id.next)
     Button next;
 
-    Record record = new Record();
-    Calendar todaysDatePickerCalendar = Calendar.getInstance();
-    DatePickerDialog todaysDatePickerDialog = DatePickerDialog.newInstance(
+    private Record record = new Record();
+    private final Calendar todaysDatePickerCalendar = Calendar.getInstance();
+    private DatePickerDialog todaysDatePickerDialog = DatePickerDialog.newInstance(
             this,
             todaysDatePickerCalendar.get(Calendar.YEAR),
             todaysDatePickerCalendar.get(Calendar.MONTH),
             todaysDatePickerCalendar.get(Calendar.DAY_OF_MONTH)
     );
-    Calendar expectedDatePickerCalendar = Calendar.getInstance();
-    DatePickerDialog expectedDatePickerDialog = DatePickerDialog.newInstance(
+    private final Calendar expectedDatePickerCalendar = Calendar.getInstance();
+    private DatePickerDialog expectedDatePickerDialog = DatePickerDialog.newInstance(
             this,
             expectedDatePickerCalendar.get(Calendar.YEAR),
             expectedDatePickerCalendar.get(Calendar.MONTH),
@@ -135,9 +135,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         } else {
             final Snackbar snackBar = Snackbar.make(findViewById(android.R.id.content), R.string.snackbar_missing_name, Snackbar.LENGTH_LONG);
 
-            snackBar.setAction(R.string.snackbar_dismiss, v -> {
-                snackBar.dismiss();
-            });
+            snackBar.setAction(R.string.snackbar_dismiss, v -> snackBar.dismiss());
             snackBar.show();
         }
     }
