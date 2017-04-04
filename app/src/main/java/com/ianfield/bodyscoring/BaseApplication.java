@@ -29,6 +29,9 @@ public class BaseApplication extends Application {
     private AppComponent component;
 
     public static String getJSONFromBundle(Bundle bundle) {
+        if (bundle == null) {
+            return "";
+        }
         JSONObject json = new JSONObject();
         Set<String> keys = bundle.keySet();
         for (String key : keys) {
