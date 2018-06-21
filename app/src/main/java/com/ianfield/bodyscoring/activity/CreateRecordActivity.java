@@ -81,13 +81,13 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
             record.setSetting(setting);
             record.setPlannedCalvingDate(today);
             record.setScoringDate(today);
-            scoringDate.setText(DateUtils.dateToString(new Date()));
-            expectedCalvingDate.setText(DateUtils.dateToString(new Date()));
+            scoringDate.setText(DateUtils.INSTANCE.dateToString(new Date()));
+            expectedCalvingDate.setText(DateUtils.INSTANCE.dateToString(new Date()));
         } else {
             name.setText(record.getName());
             name.setSelection(record.getName().length());
-            scoringDate.setText(DateUtils.dateToString(record.getScoringDate()));
-            expectedCalvingDate.setText(DateUtils.dateToString(record.getPlannedCalvingDate()));
+            scoringDate.setText(DateUtils.INSTANCE.dateToString(record.getScoringDate()));
+            expectedCalvingDate.setText(DateUtils.INSTANCE.dateToString(record.getPlannedCalvingDate()));
 
             todaysDatePickerCalendar.setTime(record.getScoringDate());
             todaysDatePickerDialog = DatePickerDialog.newInstance(
@@ -142,7 +142,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
 
     private void saveRecordAndLaunchScoring() {
         if (!existing) {
-            record = RecordManager.createRecord(record);
+            record = RecordManager.INSTANCE.createRecord(record);
         }
         Intent intent = new Intent(this, ScoringActivity.class);
         intent.putExtra(getString(R.string.extra_record_id), record.getId());
@@ -165,10 +165,10 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
             if (existing) {
                 Realm.getDefaultInstance().commitTransaction();
             }
-            scoringDate.setText(DateUtils.dateToString(date.getTime()));
+            scoringDate.setText(DateUtils.INSTANCE.dateToString(date.getTime()));
         } else {
             record.setPlannedCalvingDate(date.getTime());
-            expectedCalvingDate.setText(DateUtils.dateToString(date.getTime()));
+            expectedCalvingDate.setText(DateUtils.INSTANCE.dateToString(date.getTime()));
         }
     }
 }

@@ -47,7 +47,7 @@ public class ScoringActivity extends AppCompatActivity {
     }
 
     private void retrieveRecord() {
-        record = RecordManager.getRecordById(
+        record = RecordManager.INSTANCE.getRecordById(
                 getIntent().getExtras().getString(
                         getString(R.string.extra_record_id)
                 )

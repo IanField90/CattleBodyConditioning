@@ -7,7 +7,7 @@
     android:weightSum="6">
 
     <TextView
-        android:id="@+id/score"
+        android:id="@+id/scoreText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
@@ -17,7 +17,7 @@
         tools:text="2.5" />
 
     <Button
-        android:id="@+id/subtract_button"
+        android:id="@+id/subtractButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -25,7 +25,7 @@
         android:textColor="@android:color/primary_text_light" />
 
     <Button
-        android:id="@+id/add_button"
+        android:id="@+id/addButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -33,7 +33,7 @@
         android:textColor="@android:color/primary_text_light" />
 
     <TextView
-        android:id="@+id/count_text"
+        android:id="@+id/countText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"

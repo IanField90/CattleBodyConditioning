@@ -2,7 +2,7 @@ package com.ianfield.bodyscoring.di;
 
 import android.content.Context;
 
-import com.ianfield.bodyscoring.BaseApplication;
+import com.ianfield.bodyscoring.BodyConditioningApplication;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -20,9 +20,9 @@ import dagger.Provides;
  */
 @Module
 public class AppModule {
-    private final BaseApplication application;
+    private final BodyConditioningApplication application;
 
-    public AppModule(BaseApplication application) {
+    public AppModule(BodyConditioningApplication application) {
         this.application = application;
     }
 

@@ -131,7 +131,7 @@ public class ViewRecordActivity extends AppCompatActivity {
         date.setText(getString(R.string.recorded_label, dateFormat.format(record.getScoringDate())));
         plannedCalving.setText(getString(R.string.planned_calving_label, dateFormat.format(record.getPlannedCalvingDate())));
 
-        final double[] scoreScale = record.getSetting().equals(Setting.NZ) ? ScoreScale.NZ_SCORE_SCALE : ScoreScale.UK_SCORE_SCALE;
+        final double[] scoreScale = record.getSetting().equals(Setting.NZ) ? ScoreScale.INSTANCE.getNZ_SCORE_SCALE() : ScoreScale.INSTANCE.getUK_SCORE_SCALE();
 
         ArrayList<BarEntry> scores = new ArrayList<>();
         int count = 0;
