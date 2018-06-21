@@ -82,5 +82,5 @@
         android:layout_gravity="center_horizontal"
         android:backgroundTint="@color/accent"
         android:text="@string/create"
-        android:textColor="@color/grey_800" />
+        android:textColor="@color/white" />
 </RelativeLayout>
