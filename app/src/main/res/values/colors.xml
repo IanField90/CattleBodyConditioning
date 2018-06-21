@@ -5,6 +5,7 @@
     <color name="accent">#6256AB</color>
 
     <color name="graph_background">#FAFAFA</color>
+    <color name="graph_bar">#8BCD86</color>
 
     <color name="mdtp_accent_color">@color/primary</color>
     <color name="mdtp_accent_color_dark">@color/primary_dark</color>

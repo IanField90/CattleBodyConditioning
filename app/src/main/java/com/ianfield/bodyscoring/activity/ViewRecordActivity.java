@@ -144,9 +144,9 @@ public class ViewRecordActivity extends AppCompatActivity {
         final int countTotal = count;
         BarDataSet set = new BarDataSet(scores, "Data Set 1");
 
-        set.setColor(getResources().getColor(R.color.accent));
-//        set.setBarBorderWidth(1f);
-//        set.setBarBorderColor(getResources().getColor(R.color.primary));
+        set.setColor(getResources().getColor(R.color.graph_bar));
+        set.setBarBorderWidth(1f);
+        set.setBarBorderColor(getResources().getColor(R.color.primary));
         set.setValueFormatter((value, entry, dataSetIndex, viewPortHandler) -> {
             if (value > 0) {
                 return String.format(Locale.getDefault(), "%.0f%%", (value / (float) countTotal) * 100f);
