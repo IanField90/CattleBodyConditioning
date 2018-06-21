@@ -74,7 +74,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         @Setting.Country String setting = PreferenceManager
                 .getDefaultSharedPreferences(this)
                 .getString(
-                        getString(R.string.pref_Locality),
+                        getString(R.string.pref_locality),
                         getString(R.string.pref_localities_default)
                 );
         if (!existing) {
@@ -135,7 +135,7 @@ public class CreateRecordActivity extends AppCompatActivity implements DatePicke
         } else {
             final Snackbar snackBar = Snackbar.make(findViewById(android.R.id.content), R.string.snackbar_missing_name, Snackbar.LENGTH_LONG);
 
-            snackBar.setAction(R.string.snackbar_dismiss, v -> snackBar.dismiss());
+//            snackBar.setAction(R.string.snackbar_dismiss, v -> snackBar.dismiss());
             snackBar.show();
         }
     }

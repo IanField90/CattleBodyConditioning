@@ -200,6 +200,12 @@ public class ViewRecordActivity extends AppCompatActivity {
         XAxis xAxis = chart.getXAxis();
         xAxis.setEnabled(true);
         xAxis.setDrawGridLines(true);
+        if (record.getSetting().equals(Setting.UK)) {
+            xAxis.setLabelCount(10);
+        } else {
+            xAxis.setLabelCount(13);
+        }
+        xAxis.setGranularityEnabled(true);
         xAxis.setGranularity(0.5f);
         xAxis.setAxisMinimum((float) scoreScale[0] - .5f);
         xAxis.setAxisMaximum((float) scoreScale[scoreScale.length - 1] + .5f);

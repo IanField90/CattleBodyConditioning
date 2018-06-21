@@ -3,5 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="chart_offset">8dp</dimen>
-    <dimen name="chart_value_text_size">5sp</dimen>
+    <dimen name="chart_value_text_size">4sp</dimen>
 </resources>
