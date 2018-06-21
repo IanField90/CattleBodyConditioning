@@ -1,10 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
-apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -14,9 +13,9 @@ android {
     defaultConfig {
         applicationId "com.ianfield.bodyscoring"
         minSdkVersion 21
-        targetSdkVersion 26
-        versionCode 7
-        versionName "1.2.1"
+        targetSdkVersion 27
+        versionCode 8
+        versionName "1.2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -49,27 +48,18 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // UI
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:design:26.1.0'
-    implementation 'com.android.support:cardview-v7:26.1.0'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
-    implementation 'com.wdullaer:materialdatetimepicker:2.5.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.wdullaer:materialdatetimepicker:3.6.0'
 
-    implementation 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    implementation 'com.jakewharton:butterknife:8.8.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.0'
 
-    implementation 'com.google.android.gms:play-services-base:11.4.2'
-    implementation 'com.google.android.gms:play-services-drive:11.4.2'
+    implementation 'com.google.android.gms:play-services-base:15.0.1'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-
-    // Crashlytics
-    // compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-    //     transitive = true;
-    // }
-
-//    compile 'io.reactivex:rxjava:1.1.10'
-//    compile 'io.reactivex:rxandroid:1.2.1'
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
@@ -90,14 +80,14 @@ dependencies {
 
 
     androidTestImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    androidTestImplementation 'com.android.support:support-annotations:26.1.0'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test:rules:1.0.1'
+    androidTestImplementation 'com.android.support:support-annotations:28.0.0-alpha3'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
     // Hamcrest library
     androidTestImplementation 'org.hamcrest:hamcrest-library:1.3'
     // UI testing with Espresso
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.2'
     // UI testing with UI Automator
     // androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 
