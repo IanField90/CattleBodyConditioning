@@ -2,6 +2,7 @@ package com.ianfield.bodyscoring.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat.makeSceneTransitionAnimation
 import android.support.v4.util.Pair
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -10,15 +11,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-
 import com.ianfield.bodyscoring.R
 import com.ianfield.bodyscoring.managers.RecordManager
 import com.ianfield.bodyscoring.models.Record
 import com.ianfield.bodyscoring.widgets.RecordAdapter
-
 import kotlinx.android.synthetic.main.activity_main.*
-
-import android.support.v4.app.ActivityOptionsCompat.makeSceneTransitionAnimation
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         setupPromptForSize(records.size)
 
         recordAdapter = RecordAdapter(records, object : RecordAdapter.OnRecordActionListener {
-            override fun onView(recordId: String, name: TextView, recordedDate: TextView, dueDate: TextView) {
+            override fun onView(recordId: String?, name: TextView?, recordedDate: TextView?, dueDate: TextView?) {
                 val intent = Intent(this@MainActivity, ViewRecordActivity::class.java)
                 intent.putExtra(getString(R.string.extra_record_id), recordId)
                 val options = makeSceneTransitionAnimation(
@@ -52,21 +49,21 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent, options.toBundle())
             }
 
-            override fun onEdit(recordId: String) {
+            override fun onEdit(recordId: String?) {
                 val intent = Intent(this@MainActivity, CreateRecordActivity::class.java)
                 intent.putExtra(getString(R.string.extra_record_id), recordId)
                 startActivity(intent)
             }
 
-            override fun onDelete(record: Record, position: Int) {
+            override fun onDelete(record: Record?, position: Int) {
                 AlertDialog.Builder(this@MainActivity)
                         .setTitle(R.string.delete)
                         .setMessage(R.string.are_you_sure)
                         .setPositiveButton(R.string.yes) { _, _ ->
-                            RecordManager.deleteRecord(record)
+                            RecordManager.deleteRecord(record!!)
                             recordAdapter?.notifyItemRemoved(position)
-                            recordAdapter?.notifyItemRangeChanged(position, recordAdapter!!.records.size)
-                            setupPromptForSize(recordAdapter!!.records.size)
+                            recordAdapter?.notifyItemRangeChanged(position, recordAdapter!!.records!!.size)
+                            setupPromptForSize(recordAdapter!!.records!!.size)
 
                         }
                         .setNegativeButton(R.string.no, null)
@@ -103,16 +100,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupPromptForSize(size: Int) {
         if (size == 0) {
-            createRecordPrompt!!.visibility = View.VISIBLE
-            savedList!!.visibility = View.GONE
+            createRecordPrompt.visibility = View.VISIBLE
+            savedList.visibility = View.GONE
         } else {
-            createRecordPrompt!!.visibility = View.GONE
-            savedList!!.visibility = View.VISIBLE
+            createRecordPrompt.visibility = View.GONE
+            savedList.visibility = View.VISIBLE
         }
     }
 
     companion object {
-
         private val TAG = "MainActivity"
     }
 }

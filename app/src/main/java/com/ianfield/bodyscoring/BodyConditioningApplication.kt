@@ -15,6 +15,8 @@ import org.json.JSONObject
 
 import io.realm.Realm
 import io.realm.RealmConfiguration
+import io.realm.RealmMigration
+import io.realm.RealmSchema
 
 // import com.crashlytics.android.Crashlytics;
 // import io.fabric.sdk.android.Fabric;
@@ -28,6 +30,13 @@ class BodyConditioningApplication : Application() {
         super.onCreate()
         Realm.init(this)
         val realmConfig = RealmConfiguration.Builder()
+                .schemaVersion(1)
+                .migration({ realm, oldVersion, _ ->
+                    val schema: RealmSchema =  realm.schema
+                    if (oldVersion == 0L) {
+                        schema.get("Record")?.removePrimaryKey()
+                    }
+                })
                 .build()
         Realm.setDefaultConfiguration(realmConfig)
 

@@ -22,7 +22,7 @@
         android:transitionName="name" />
 
     <TextView
-        android:id="@+id/planned_calving"
+        android:id="@+id/plannedCalving"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
