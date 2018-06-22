@@ -7,6 +7,7 @@ import com.ianfield.bodyscoring.utils.Setting
 
 import io.realm.Realm
 import io.realm.RealmResults
+import io.realm.Sort
 import java.util.*
 
 /**
@@ -17,10 +18,10 @@ object RecordManager {
     val allRecords: RealmResults<Record>
         get() = Realm.getDefaultInstance()
                 .where(Record::class.java)
+                .sort("scoringDate", Sort.DESCENDING)
                 .findAll()
 
     fun createRecord(record: Record): Record {
-        var record = record
         record.id = UUID.randomUUID().toString()
         var scoreScale = ScoreScale.UK_SCORE_SCALE
         when (record.setting) {
@@ -42,14 +43,14 @@ object RecordManager {
 
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
-        record = realm.copyToRealm(record)
+        val realmRecord = realm.copyToRealm(record)
         for (score in scores) {
             realm.copyToRealm(score)
-            record.scores?.add(score)
+            realmRecord.scores?.add(score)
         }
         realm.commitTransaction()
 
-        return record
+        return realmRecord
     }
 
     fun updateRecord(record: Record): Record {

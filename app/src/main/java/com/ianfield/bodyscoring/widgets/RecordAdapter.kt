@@ -43,9 +43,9 @@ class RecordAdapter(val records: RealmResults<Record>?, private val listener: On
     }
 
     interface OnRecordActionListener {
-        fun onView(id: String?, name: TextView?, date: TextView?, plannedCalving: TextView?)
+        fun onView(recordId: String?, name: TextView?, date: TextView?, plannedCalving: TextView?)
 
-        fun onEdit(id: String?)
+        fun onEdit(recordId: String?)
 
         fun onDelete(record: Record?, position: Int)
     }
