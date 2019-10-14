@@ -1,7 +1,5 @@
 Cattle Body Conditioning
 ===
-[![Build Status](https://travis-ci.org/IanField90/CattleBodyConditioning.png)](https://travis-ci.org/IanField90/CattleBodyConditioning)
-
 ![Icon](https://raw.githubusercontent.com/IanField90/CattleBodyConditioning/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
 An application for the analysis of heard body condition in dairy cattle for the UK and NZ. Including multiple records.
