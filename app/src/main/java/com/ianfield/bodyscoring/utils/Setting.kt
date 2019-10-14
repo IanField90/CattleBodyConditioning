@@ -1,6 +1,6 @@
 package com.ianfield.bodyscoring.utils
 
-import android.support.annotation.StringDef
+import androidx.annotation.StringDef
 
 /**
  * Created by Ian Field on 05/08/2016.

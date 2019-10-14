@@ -10,7 +10,7 @@
 
     </style>
 
-    <style name="TextLabel" parent="TextAppearance.AppCompat">
+    <style name="TextLabel" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <!-- Hint color and label color in FALSE state -->
         <item name="android:textColorHint">@color/grey_800</item>
         <item name="android:textStyle">bold</item>

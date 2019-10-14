@@ -2,11 +2,11 @@ package com.ianfield.bodyscoring.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.ActivityOptionsCompat.makeSceneTransitionAnimation
-import android.support.v4.util.Pair
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.core.app.ActivityOptionsCompat.makeSceneTransitionAnimation
+import androidx.core.util.Pair
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View

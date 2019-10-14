@@ -1,8 +1,8 @@
 package com.ianfield.bodyscoring.widgets
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 
 import com.ianfield.bodyscoring.R
 
