@@ -58,10 +58,29 @@ object RecordManager {
     }
 
     fun getRecordById(id: String): Record? {
-        return Realm.getDefaultInstance()
+        val realm = Realm.getDefaultInstance()
+        val record = realm
                 .where(Record::class.java)
                 .equalTo("id", id)
-                .findFirst()
+                .findFirst()!!
+        if (record.setting == Setting.UK && (record.scores!!.size < ScoreScale.UK_SCORE_SCALE.size)) {
+            val missingScores = ScoreScale.UK_SCORE_SCALE.toList().minus(record.scores?.map { it.score }!!)
+            val scores = mutableListOf<Score>()
+            missingScores.forEach {
+                scores.add(ScoreManager.createScore(it))
+            }
+            realm.beginTransaction()
+            scores.forEach { record.scores?.add(it) }
+            realm.commitTransaction()
+        }
+
+        val orderedScores = record.scores?.sortedBy { it.score }
+        realm.beginTransaction()
+        record.scores?.clear()
+        orderedScores?.forEach { record.scores?.add(it) }
+        realm.commitTransaction()
+
+        return record
     }
 
     fun deleteRecord(record: Record) {
