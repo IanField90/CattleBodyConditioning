@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.annotation.CallSuper
 import android.util.Log
 
-import com.facebook.stetho.Stetho
 import com.ianfield.bodyscoring.di.AppComponent
 import com.ianfield.bodyscoring.di.DaggerAppComponent
 
@@ -15,11 +14,7 @@ import org.json.JSONObject
 
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import io.realm.RealmMigration
 import io.realm.RealmSchema
-
-// import com.crashlytics.android.Crashlytics;
-// import io.fabric.sdk.android.Fabric;
 
 class BodyConditioningApplication : Application() {
 
@@ -31,12 +26,12 @@ class BodyConditioningApplication : Application() {
         Realm.init(this)
         val realmConfig = RealmConfiguration.Builder()
                 .schemaVersion(1)
-                .migration({ realm, oldVersion, _ ->
+                .migration { realm, oldVersion, _ ->
                     val schema: RealmSchema =  realm.schema
                     if (oldVersion == 0L) {
                         schema.get("Record")?.removePrimaryKey()
                     }
-                })
+                }
                 .build()
         Realm.setDefaultConfiguration(realmConfig)
 
@@ -44,7 +39,6 @@ class BodyConditioningApplication : Application() {
                 .build()
 
         if (BuildConfig.DEBUG) {
-            Stetho.initializeWithDefaults(this)
             registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
                 override fun onActivityCreated(activity: Activity, bundle: Bundle?) {
                     Log.d(TAG, activity.localClassName + " created. Intent extras: " + getJSONFromBundle(activity.intent.extras))

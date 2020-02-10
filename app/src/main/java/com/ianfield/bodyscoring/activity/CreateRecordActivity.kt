@@ -147,7 +147,7 @@ class CreateRecordActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
     }
 
     companion object {
-        private val PLANNED_CALVING_DATE_PICKER = "planned_calving_date_picker"
-        private val SCORING_DATE_PICKER = "scoring_date_picker"
+        const val PLANNED_CALVING_DATE_PICKER = "planned_calving_date_picker"
+        const val SCORING_DATE_PICKER = "scoring_date_picker"
     }
 }
