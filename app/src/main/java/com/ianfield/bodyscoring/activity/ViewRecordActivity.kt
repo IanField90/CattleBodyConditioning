@@ -1,26 +1,27 @@
 package com.ianfield.bodyscoring.activity
 
-import android.Manifest
-import android.content.pm.PackageManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ShareCompat
+import androidx.core.content.FileProvider
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.ianfield.bodyscoring.R
 import com.ianfield.bodyscoring.models.Record
 import com.ianfield.bodyscoring.utils.ScoreScale
 import com.ianfield.bodyscoring.utils.Setting
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_view_record.*
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,31 +40,17 @@ class ViewRecordActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-        // Respond to the action bar's Up/Home button
+            // Respond to the action bar's Up/Home button
             android.R.id.home -> {
                 supportFinishAfterTransition()
                 return true
             }
-            R.id.action_save_chart -> return checkPermissionsAndSave()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun checkPermissionsAndSave(): Boolean {
-        val hasPermission = ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-        if (!hasPermission) {
-            ActivityCompat.requestPermissions(this,
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    REQUEST_WRITE_STORAGE)
-        } else {
-            if (chart.saveToGallery(record!!.name!! + System.currentTimeMillis(), 100)) {
-                Snackbar.make(root, R.string.save_success, Snackbar.LENGTH_SHORT).show()
-            } else {
-                Snackbar.make(root, R.string.save_failed, Snackbar.LENGTH_SHORT).show()
+            R.id.action_share -> {
+                shareData()
+                return true
             }
         }
-        return true
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {
@@ -94,11 +81,13 @@ class ViewRecordActivity : AppCompatActivity() {
         set.color = resources.getColor(R.color.graph_bar)
         set.barBorderWidth = 1f
         set.barBorderColor = resources.getColor(R.color.primary)
-        set.setValueFormatter { value, _, _, _ ->
-            if (value > 0) {
-                 String.format(Locale.getDefault(), "%.0f%%", (value / count.toFloat()) * 100f)
-            } else {
-                 ""
+        set.valueFormatter = object : ValueFormatter() {
+            override fun getFormattedValue(value: Float): String {
+                return if (value > 0) {
+                    String.format(Locale.getDefault(), "%.0f%%", (value / count.toFloat()) * 100f)
+                } else {
+                    ""
+                }
             }
         }
         set.valueTextSize = resources.getDimension(R.dimen.chart_value_text_size)
@@ -168,21 +157,18 @@ class ViewRecordActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            REQUEST_WRITE_STORAGE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    checkPermissionsAndSave()
-                } else {
-                    Snackbar.make(root, R.string.permission_denied, Snackbar.LENGTH_SHORT).show()
-                }
-            }
-        }
+    private fun shareData() {
+        val text = record?.toExport()!!
+        ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setText(text)
+                .setChooserTitle(R.string.title_share_record)
+                .startChooser()
+//        startActivity(Intent.createChooser(intent, "Choose"))
     }
 
     companion object {
-        private val TAG = "ViewRecordActivity"
-        private val REQUEST_WRITE_STORAGE = 112
+        const val TAG = "ViewRecordActivity"
+        const val REQUEST_WRITE_STORAGE = 112
     }
 }

@@ -48,4 +48,6 @@
     <string name="view">View</string>
     <string name="score">Score</string>
     <string name="count">Count</string>
+    <string name="share">Share</string>
+    <string name="title_share_record">Share record</string>
 </resources>

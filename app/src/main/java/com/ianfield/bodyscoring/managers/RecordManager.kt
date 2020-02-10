@@ -62,11 +62,10 @@ object RecordManager {
         val record = realm
                 .where(Record::class.java)
                 .equalTo("id", id)
-                .findFirst()!!
-        if (record.setting == Setting.UK && (record.scores!!.size < ScoreScale.UK_SCORE_SCALE.size)) {
-            updateRecordScale(record, realm)
-        }
-
+                .findFirst()
+//        if (record.setting == Setting.UK && (record.scores!!.size < ScoreScale.UK_SCORE_SCALE.size)) {
+//            updateRecordScale(record, realm)
+//        }
         return record
     }
 

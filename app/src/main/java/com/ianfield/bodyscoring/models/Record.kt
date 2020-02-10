@@ -39,24 +39,15 @@ open class Record : RealmObject() {
 //        this.id = UUID.randomUUID().toString()
 //    }
 
-    fun toCSV(): String {
+    fun toExport(): String {
         val df = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        var csv = String.format("%s\n", name)
-        csv += "Recorded on," + df.format(scoringDate) + "\n"
-        csv += "Planned start of calving," + df.format(plannedCalvingDate) + "\n\n"
+        var export = String.format("%s\n", name)
+        export += "Recorded on: ${df.format(scoringDate)}\n"
+        export += "Planned start of calving: ${df.format(plannedCalvingDate)}\n\n"
 
-        var scoreHeadings = "Score,"
-        var scoreValues = "Count,"
-        for (score in scores!!.sort("score", Sort.ASCENDING)) {
-            scoreHeadings += String.format(Locale.getDefault(), "%.1f,", score.score)
-            scoreValues += score.count.toString() + ","
+        scores?.forEach {
+            export += "${it.score}: ${it.count}\n"
         }
-        scoreHeadings = scoreHeadings.substring(0, scoreHeadings.length - 1)
-        scoreValues = scoreValues.substring(0, scoreValues.length - 1)
-        scoreHeadings += "\n"
-        scoreValues += "\n"
-        csv += scoreHeadings
-        csv += scoreValues
-        return csv
+        return export
     }
 }

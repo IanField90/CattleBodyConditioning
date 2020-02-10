@@ -56,7 +56,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.wdullaer:materialdatetimepicker:3.6.0'
 
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     // Dagger
     compileOnly 'javax.annotation:jsr250-api:1.0'
