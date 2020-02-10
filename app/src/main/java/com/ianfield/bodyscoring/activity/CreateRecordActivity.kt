@@ -2,7 +2,7 @@ package com.ianfield.bodyscoring.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View
